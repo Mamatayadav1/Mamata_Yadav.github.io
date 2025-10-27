@@ -1,34 +1,809 @@
-Projects:
-	1. Vehicle real time Sensor Analysis-
-		Problem Statement: Sensor Data of Six moths was provided, the aim was to reduce cost loss caused due earlier failure of components and false failure indication of any sensor(FP and FN) with priority keeping false negative. We have to develop a predictive model to minimize the error caused sensor reading.
-		Task : Data Wrangling, Data Augmentation, Standardizing the data, Model Training, Hyperparameter Tuning, Model Validation and Checking Data Drift
-		Tools : Mongo DB, Python, Machine Learning,Pytorch, Kafka, Github, streamlit
-	
-	2. Email analyser and extractor-
-		Problem Statement : To Analyse and Extract details from an Email and sort them sequentially . This was to filter out spams/irrelevant Email from the Email received. The goal was to reduce False Negative (FN) and extract details like sender name, Language, intent of email,summary of email body and rate the criticality.
-		Task : Data Augmentation, Synthetic Data Generation, Prompt Engineering, Prompt Tuning, Transfer Learning, Model Evaluation and Deployment
-		Tools : Python, Excel, GPT-4, Github, CI/CD Pipeline, NLP, Jupyter Notebook, Streamlit, Azure Cloud Service
-	
-	3. Warehouse goods tracker-
-		Problem Statement : To keep a record of goods in and out from the warehouse. We have to extract and keep record of P-Code from every products moving via conveyor belt
-		Task : Capturing Image, Amplifying it, Reducing the Noise, Extracting the Details from Image
-		Tools : Python,Regex, VS- Code, API, Transfer Learning,Deep Learning, Open CV, CNN, Streamlit.
-	
-	
-	
-Developed Gradient Boosting and Random Forest classification models with hyperparameter tuning using GridSearchCV; saved and deployed models using joblib for production-ready use.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mamata Yadav - Data Scientist & AI Developer. Explore my projects in Machine Learning, Deep Learning, Computer Vision, and NLP.">
+    <meta name="keywords" content="Data Science, AI, Machine Learning, Deep Learning, Computer Vision, NLP, Mamata Yadav">
+    <meta name="author" content="Mamata Yadav">
+    <title>Mamata Yadav - Data Scientist & AI Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-Built a hybrid recommendation engine combining content-based filtering (TF-IDF, cosine similarity) and collaborative filtering (user-item interactions) to deliver personalized suggestions.
+        :root {
+            --primary: #8b7fc7;
+            --secondary: #a8d5e2;
+            --accent: #6b5b95;
+            --text: #2d2d2d;
+            --light: #f8f9ff;
+            --white: #ffffff;
+            --shadow: rgba(139, 127, 199, 0.15);
+        }
 
-Conducted comprehensive Exploratory Data Analysis (EDA) across multiple datasets using Pandas, Seaborn, and automated profiling to identify key patterns, correlations, and anomalies.
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8e9ff 100%);
+            overflow-x: hidden;
+        }
 
-Applied statistical hypothesis testing techniques including z-tests and t-tests to validate business assumptions and compare user group performance in experimental scenarios.
+        body.dark-mode {
+            --text: #e0e0e0;
+            --light: #1a1a2e;
+            --white: #16213e;
+            --shadow: rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
 
-Implemented customer segmentation using K-Means clustering and evaluated optimal cluster counts using silhouette scores and elbow method.
-Trained various classification models such as Logistic Regression, K-Nearest Neighbors, and Decision Trees, and evaluated performance using confusion matrix, precision, recall, and F1-score.
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-Leveraged NLP techniques including topic modeling with Latent Dirichlet Allocation (LDA) and visualized insights using word clouds for unstructured text datasets.
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px var(--shadow);
+            transition: all 0.3s ease;
+        }
 
-Applied Principal Component Analysis (PCA) for dimensionality reduction, improving model efficiency while maintaining data variance.
+        body.dark-mode nav {
+            background: rgba(22, 33, 62, 0.95);
+        }
 
-Performed time series forecasting using ARIMA and SARIMAX models to predict GDP trends for over 200 countries from 1960 to 2023, including preprocessing steps like stationarity checks and differencing.
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text);
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        section {
+            padding: 100px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero {
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            box-shadow: 0 10px 40px var(--shadow);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--shadow);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .card-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .card-item::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--light);
+            color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .project-desc {
+            opacity: 0.8;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .project-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .skill-tag {
+            padding: 4px 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .blogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow);
+        }
+
+        .blog-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .blog-excerpt {
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: var(--white);
+            padding: 40px 0;
+            text-align: center;
+            box-shadow: 0 -5px 20px var(--shadow);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            transform: scale(1.2);
+            color: var(--accent);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--white);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .projects-grid, .blogs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">Mamata Yadav</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+                <li><a href="#blogs" onclick="closeMenu()">Blogs</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><i class="fas fa-moon"></i></button></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="profile-img">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h1>Mamata Yadav</h1>
+                <p class="subtitle">Data Scientist & AI Developer</p>
+                <p class="description">Passionate about transforming data into actionable insights and building intelligent systems that solve real-world problems. Specialized in Machine Learning, Deep Learning, and AI solutions with a focus on innovation and impact.</p>
+                
+                <div class="social-links">
+                    <a href="mailto:mamata@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://linkedin.com/in/mamatayadav" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/mamatayadav" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+
+                <div class="info-cards">
+                    <div class="card">
+                        <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                        <div class="card-item">
+                            <strong>Master's in Data Science</strong><br>
+                            University Name | 2021-2023
+                        </div>
+                        <div class="card-item">
+                            <strong>Bachelor's in Computer Science</strong><br>
+                            University Name | 2017-2021
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3><i class="fas fa-briefcase"></i> Experience</h3>
+                        <div class="card-item">
+                            <strong>Data Scientist</strong><br>
+                            Company Name | 2023-Present
+                        </div>
+                        <div class="card-item">
+                            <strong>AI Intern</strong><br>
+                            Company Name | 2022-2023
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3><i class="fas fa-code"></i> Skills</h3>
+                        <div class="card-item">Python, R, SQL</div>
+                        <div class="card-item">TensorFlow, PyTorch, Keras</div>
+                        <div class="card-item">Scikit-learn, Pandas, NumPy</div>
+                        <div class="card-item">Computer Vision, NLP</div>
+                        <div class="card-item">Data Visualization (Tableau, Power BI)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-img"><i class="fas fa-brain"></i></div>
+                    <div class="project-content">
+                        <span class="project-category">Machine Learning</span>
+                        <h3 class="project-title">Customer Churn Prediction</h3>
+                        <p class="project-desc">Built a predictive model to identify customers likely to churn using ensemble methods and feature engineering techniques.</p>
+                        <div class="project-skills">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Scikit-learn</span>
+                            <span class="skill-tag">XGBoost</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/mamatayadav/project1" class="btn btn-primary" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="btn btn-secondary">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-img"><i class="fas fa-image"></i></div>
+                    <div class="project-content">
+                        <span class="project-category">Computer Vision</span>
+                        <h3 class="project-title">Real-Time Object Detection</h3>
+                        <p class="project-desc">Developed a real-time object detection system using YOLO for surveillance and security applications.</p>
+                        <div class="project-skills">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">OpenCV</span>
+                            <span class="skill-tag">YOLO</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/mamatayadav/project2" class="btn btn-primary" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="btn btn-secondary">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-img"><i class="fas fa-comments"></i></div>
+                    <div class="project-content">
+                        <span class="project-category">NLP</span>
+                        <h3 class="project-title">Sentiment Analysis Tool</h3>
+                        <p class="project-desc">Created an NLP-based sentiment analysis tool for social media monitoring using transformers and BERT.</p>
+                        <div class="project-skills">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">BERT</span>
+                            <span class="skill-tag">Transformers</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/mamatayadav/project3" class="btn btn-primary" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="btn btn-secondary">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-img"><i class="fas fa-chart-line"></i></div>
+                    <div class="project-content">
+                        <span class="project-category">Data Analytics</span>
+                        <h3 class="project-title">Sales Dashboard & Analytics</h3>
+                        <p class="project-desc">Interactive dashboard for sales performance analysis with predictive insights and trend visualization.</p>
+                        <div class="project-skills">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Tableau</span>
+                            <span class="skill-tag">SQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/mamatayadav/project4" class="btn btn-primary" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="btn btn-secondary">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-img"><i class="fas fa-network-wired"></i></div>
+                    <div class="project-content">
+                        <span class="project-category">Deep Learning</span>
+                        <h3 class="project-title">Image Classification CNN</h3>
+                        <p class="project-desc">Built a convolutional neural network for multi-class image classification with 95% accuracy.</p>
+                        <div class="project-skills">
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">Keras</span>
+                            <span class="skill-tag">CNN</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/mamatayadav/project5" class="btn btn-primary" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="btn btn-secondary">Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-img"><i class="fas fa-robot"></i></div>
+                    <div class="project-content">
+                        <span class="project-category">Machine Learning</span>
+                        <h3 class="project-title">Recommendation System</h3>
+                        <p class="project-desc">Collaborative filtering recommendation engine for e-commerce product suggestions.</p>
+                        <div class="project-skills">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Surprise</span>
+                            <span class="skill-tag">Flask</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/mamatayadav/project6" class="btn btn-primary" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                            <a href="#" class="btn btn-secondary">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blogs">
+        <div class="container">
+            <h2 class="section-title">Latest Blogs</h2>
+            <div class="blogs-grid">
+                <div class="blog-card fade-in">
+                    <div class="blog-img"><i class="fas fa-database"></i></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Author: Mamata Yadav</span>
+                            <span>Jan 2025</span>
+                        </div>
+                        <h3 class="blog-title">What is Data Science Really About</h3>
+                        <p class="blog-excerpt">Explore the fascinating world of data science, its applications across industries, and how it's shaping our future through data-driven decision making.</p>
+                        <a href="#" class="btn btn-primary">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card fade-in">
+                    <div class="blog-img"><i class="fas fa-project-diagram"></i></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Author: Mamata Yadav</span>
+                            <span>Jan 2025</span>
+                        </div>
+                        <h3 class="blog-title">Supervised vs Unsupervised Learning</h3>
+                        <p class="blog-excerpt">A comprehensive guide to understanding the key differences between supervised and unsupervised learning algorithms with practical examples.</p>
+                        <a href="#" class="btn btn-primary">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card fade-in">
+                    <div class="blog-img"><i class="fas fa-brain"></i></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Author: Mamata Yadav</span>
+                            <span>Dec 2024</span>
+                        </div>
+                        <h3 class="blog-title">Understanding Neural Networks in Simple Words</h3>
+                        <p class="blog-excerpt">Demystifying neural networks for beginners - learn how these powerful algorithms work without complex mathematics.</p>
+                        <a href="#" class="btn btn-primary">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card fade-in">
+                    <div class="blog-img"><i class="fas fa-broom"></i></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Author: Mamata Yadav</span>
+                            <span>Dec 2024</span>
+                        </div>
+                        <h3 class="blog-title">Data Preprocessing: A Complete Beginner Guide</h3>
+                        <p class="blog-excerpt">Master the essential techniques of data preprocessing including handling missing values, normalization, and feature scaling.</p>
+                        <a href="#" class="btn btn-primary">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card fade-in">
+                    <div class="blog-img"><i class="fas fa-eye"></i></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Author: Mamata Yadav</span>
+                            <span>Nov 2024</span>
+                        </div>
+                        <h3 class="blog-title">What is CNN and Why it Matters</h3>
+                        <p class="blog-excerpt">Dive into Convolutional Neural Networks and discover why they're revolutionizing computer vision applications.</p>
+                        <a href="#" class="btn btn-primary">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card fade-in">
+                    <div class="blog-img"><i class="fas fa-tools"></i></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Author: Mamata Yadav</span>
+                            <span>Nov 2024</span>
+                        </div>
+                        <h3 class="blog-title">Feature Engineering Strategies</h3>
+                        <p class="blog-excerpt">Learn advanced feature engineering techniques to boost your machine learning model performance significantly.</p>
+                        <a href="#" class="btn btn-primary">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card fade-in">
+                    <div class="blog-img"><i class="fas fa-magic"></i></div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span>Author: Mamata Yadav</span>
+                            <span>Oct 2024</span>
+                        </div>
+                        <h3 class="blog-title">The Role of Generative AI in Industry</h3>
+                        <p class="blog-excerpt">Explore how generative AI is transforming industries from healthcare to entertainment with real-world use cases.</p>
+                        <a href="#" class="btn btn-primary">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="blog-card fade-in">
+                    <div class="blog-img"><i class="fas fa-chart-bar"></i></div>
+                    <div class
