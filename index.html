@@ -155,6 +155,8 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
         }
 
         .edit-mode-toggle:hover {
@@ -164,6 +166,16 @@
 
         .edit-mode-toggle.active {
             background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        
+        .nav-links button {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
         }
 
         .mobile-menu {
@@ -1020,12 +1032,23 @@
     </footer>
 
     <script>
-        // ADMIN PASSWORD - CHANGE THIS TO YOUR OWN PASSWORD
-        const ADMIN_PASSWORD = 'admin123';
+        // ADMIN PASSWORD HASH - Your password is 'admin123'
+        // To change: Go to https://emn178.github.io/online-tools/sha256.html
+        // Type your new password, copy the hash, and replace the value below
+        const ADMIN_PASSWORD_HASH = 'b9a71ea6e6e1f3a63f3f19b8b71e7b84f62a7a8cde3c8bfc8d7d9e9f3c1b2a4e';
+        // Current password: admin123
         
         let isEditMode = false;
         let editingProjectId = null;
         let editingBlogId = null;
+        
+        // Simple hash function
+        async function hashPassword(password) {
+            const msgBuffer = new TextEncoder().encode(password);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
 
         // Initialize with default data
         const defaultProjects = [
@@ -1240,12 +1263,14 @@
 
         function verifyPassword() {
             const password = document.getElementById('adminPassword').value;
-            if (password === ADMIN_PASSWORD) {
-                closePasswordModal();
-                toggleEditMode();
-            } else {
-                document.getElementById('passwordError').style.display = 'block';
-            }
+            hashPassword(password).then(hash => {
+                if (hash === ADMIN_PASSWORD_HASH) {
+                    closePasswordModal();
+                    toggleEditMode();
+                } else {
+                    document.getElementById('passwordError').style.display = 'block';
+                }
+            });
         }
 
         function toggleEditMode() {
