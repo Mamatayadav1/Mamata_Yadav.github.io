@@ -1692,11 +1692,20 @@
         function previewProfileImage(event) {
             const file = event.target.files[0];
             if (file) {
+                // Check file size
+                if (file.size > 500000) {
+                    alert('Image is too large! Please use an image smaller than 500KB, or compress it first.');
+                    event.target.value = '';
+                    return;
+                }
+                
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    currentProfileImage = e.target.result;
-                    document.getElementById('profileImagePreview').src = currentProfileImage;
-                    document.getElementById('profileImagePreview').style.display = 'block';
+                    compressImage(e.target.result, (compressed) => {
+                        currentProfileImage = compressed;
+                        document.getElementById('profileImagePreview').src = compressed;
+                        document.getElementById('profileImagePreview').style.display = 'block';
+                    });
                 };
                 reader.readAsDataURL(file);
             }
@@ -1736,29 +1745,45 @@
         function saveProfileImage() {
             if (currentProfileImage) {
                 homeData.profileImage = currentProfileImage;
-                localStorage.setItem('homeData', JSON.stringify(homeData));
-                renderHome();
+                try {
+                    localStorage.setItem('homeData', JSON.stringify(homeData));
+                    renderHome();
+                    closeProfileImageModal();
+                } catch (e) {
+                    if (e.name === 'QuotaExceededError') {
+                        alert('Storage limit exceeded! Please use a smaller image (under 500KB).');
+                    } else {
+                        alert('Error saving image: ' + e.message);
+                    }
+                }
+            } else {
+                closeProfileImageModal();
             }
-            closeProfileImageModal();
         }
 
         // Contact Section
         function renderContact() {
             document.getElementById('contactDesc').textContent = contactData.description;
             
+            // Use the same email/social links from homeData for consistency
+            const email = homeData.email || contactData.email;
+            const linkedin = homeData.linkedin || contactData.linkedin;
+            const github = homeData.github || contactData.github;
+            
             const socialHTML = `
-                <a href="mailto:${contactData.email}" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                <a href="${contactData.linkedin}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="${contactData.github}" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="mailto:${email}" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="${linkedin}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="${github}" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
             `;
             document.getElementById('contactSocial').innerHTML = socialHTML;
         }
 
         function editContactSection() {
             document.getElementById('contactDescription').value = contactData.description;
-            document.getElementById('contactEmail').value = contactData.email;
-            document.getElementById('contactLinkedin').value = contactData.linkedin;
-            document.getElementById('contactGithub').value = contactData.github;
+            // Pre-fill with home data if contact data is not set
+            document.getElementById('contactEmail').value = homeData.email;
+            document.getElementById('contactLinkedin').value = homeData.linkedin;
+            document.getElementById('contactGithub').value = homeData.github;
             document.getElementById('contactModal').classList.add('active');
         }
 
@@ -1769,15 +1794,27 @@
         function saveContactSection(event) {
             event.preventDefault();
             
+            // Update both contact and home data to keep them in sync
+            const email = document.getElementById('contactEmail').value;
+            const linkedin = document.getElementById('contactLinkedin').value;
+            const github = document.getElementById('contactGithub').value;
+            
             contactData = {
                 description: document.getElementById('contactDescription').value,
-                email: document.getElementById('contactEmail').value,
-                linkedin: document.getElementById('contactLinkedin').value,
-                github: document.getElementById('contactGithub').value
+                email: email,
+                linkedin: linkedin,
+                github: github
             };
+            
+            // Also update home data social links
+            homeData.email = email;
+            homeData.linkedin = linkedin;
+            homeData.github = github;
 
             localStorage.setItem('contactData', JSON.stringify(contactData));
+            localStorage.setItem('homeData', JSON.stringify(homeData));
             renderContact();
+            renderHome(); // Re-render home to update social links there too
             closeContactModal();
         }
 
@@ -1785,20 +1822,61 @@
         function previewImage(event, previewId) {
             const file = event.target.files[0];
             if (file) {
+                // Check file size (max 500KB for each image to avoid localStorage limit)
+                if (file.size > 500000) {
+                    alert('Image is too large! Please use an image smaller than 500KB, or compress it first.');
+                    event.target.value = '';
+                    return;
+                }
+                
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const preview = document.getElementById(previewId);
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                    
-                    if (previewId === 'projectImagePreview') {
-                        currentProjectImage = e.target.result;
-                    } else if (previewId === 'blogImagePreview') {
-                        currentBlogImage = e.target.result;
-                    }
+                    // Compress image
+                    compressImage(e.target.result, (compressed) => {
+                        const preview = document.getElementById(previewId);
+                        preview.src = compressed;
+                        preview.style.display = 'block';
+                        
+                        if (previewId === 'projectImagePreview') {
+                            currentProjectImage = compressed;
+                        } else if (previewId === 'blogImagePreview') {
+                            currentBlogImage = compressed;
+                        }
+                    });
                 };
                 reader.readAsDataURL(file);
             }
+        }
+
+        function compressImage(base64, callback) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                let width = img.width;
+                let height = img.height;
+                
+                // Resize if too large
+                const maxSize = 800;
+                if (width > maxSize || height > maxSize) {
+                    if (width > height) {
+                        height = (height / width) * maxSize;
+                        width = maxSize;
+                    } else {
+                        width = (width / height) * maxSize;
+                        height = maxSize;
+                    }
+                }
+                
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                
+                // Compress to JPEG with quality 0.7
+                const compressed = canvas.toDataURL('image/jpeg', 0.7);
+                callback(compressed);
+            };
+            img.src = base64;
         }
 
         function showImageGenerator(type) {
@@ -1926,9 +2004,21 @@
                 projects.push(projectData);
             }
 
-            localStorage.setItem('projects', JSON.stringify(projects));
-            renderProjects();
-            closeProjectModal();
+            try {
+                localStorage.setItem('projects', JSON.stringify(projects));
+                renderProjects();
+                closeProjectModal();
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    alert('Storage limit exceeded! Your images are too large. Please use smaller images (under 500KB each) or remove some projects.');
+                    // Revert the change
+                    if (!editingProjectId) {
+                        projects.pop();
+                    }
+                } else {
+                    alert('Error saving project: ' + e.message);
+                }
+            }
         }
 
         function editProject(id) {
@@ -2048,9 +2138,21 @@
                 blogs.push(blogData);
             }
 
-            localStorage.setItem('blogs', JSON.stringify(blogs));
-            renderBlogs();
-            closeBlogModal();
+            try {
+                localStorage.setItem('blogs', JSON.stringify(blogs));
+                renderBlogs();
+                closeBlogModal();
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    alert('Storage limit exceeded! Your images are too large. Please use smaller images (under 500KB each) or remove some blogs.');
+                    // Revert the change
+                    if (!editingBlogId) {
+                        blogs.pop();
+                    }
+                } else {
+                    alert('Error saving blog: ' + e.message);
+                }
+            }
         }
 
         function editBlog(id) {
