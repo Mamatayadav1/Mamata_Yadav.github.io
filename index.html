@@ -103,6 +103,31 @@
             background: rgba(167, 139, 250, 0.8);
             border-radius: 50%;
             box-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Cursor Trail Effect */
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.6), transparent);
+            pointer-events: none;
+            z-index: 9999;
+            animation: cursorFade 0.8s ease-out forwards;
+        }
+
+        @keyframes cursorFade {
+            to {
+                opacity: 0;
+                transform: scale(2);
+            }
         }
 
         .container {
@@ -311,7 +336,18 @@
             background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: glow 2s ease-in-out infinite;
+            animation: glow 2s ease-in-out infinite, slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes glow {
@@ -323,6 +359,7 @@
             font-size: 1.6rem;
             color: var(--accent);
             margin-bottom: 20px;
+            animation: slideDown 0.8s ease-out 0.2s backwards;
         }
 
         .description {
@@ -332,6 +369,7 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            animation: slideDown 0.8s ease-out 0.3s backwards;
         }
 
         /* Social Links */
@@ -403,7 +441,23 @@
             position: relative;
             overflow: hidden;
             transform-style: preserve-3d;
+            animation: slideInUp 0.6s ease-out backwards;
         }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
 
         .card::before {
             content: '';
@@ -417,12 +471,28 @@
             transition: all 0.6s ease;
         }
 
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(167, 139, 250, 0.15), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
         .card:hover::before {
             left: 100%;
         }
 
         .card:hover {
-            transform: translateY(-15px) rotateX(5deg);
+            transform: translateY(-15px) rotateX(5deg) scale(1.02);
             box-shadow: 0 20px 60px var(--shadow);
             border-color: rgba(167, 139, 250, 0.5);
         }
@@ -549,15 +619,51 @@
             border-radius: 25px;
             overflow: hidden;
             border: 1px solid rgba(167, 139, 250, 0.2);
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             transform-style: preserve-3d;
+            animation: fadeInScale 0.5s ease-out backwards;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .project-card:nth-child(1), .blog-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2), .blog-card:nth-child(2) { animation-delay: 0.15s; }
+        .project-card:nth-child(3), .blog-card:nth-child(3) { animation-delay: 0.2s; }
+        .project-card:nth-child(4), .blog-card:nth-child(4) { animation-delay: 0.25s; }
+        .project-card:nth-child(5), .blog-card:nth-child(5) { animation-delay: 0.3s; }
+        .project-card:nth-child(6), .blog-card:nth-child(6) { animation-delay: 0.35s; }
+
+        .project-card::before, .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(129, 140, 248, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .project-card:hover::before, .blog-card:hover::before {
+            opacity: 1;
         }
 
         .project-card:hover, .blog-card:hover {
-            transform: translateY(-15px) rotateX(5deg);
-            box-shadow: 0 25px 70px var(--shadow);
-            border-color: rgba(167, 139, 250, 0.5);
+            transform: translateY(-20px) rotateX(8deg) scale(1.03);
+            box-shadow: 0 30px 80px var(--shadow);
+            border-color: rgba(167, 139, 250, 0.6);
         }
 
         .project-img, .blog-img {
@@ -697,11 +803,35 @@
             background: linear-gradient(135deg, var(--primary), var(--accent));
             color: white;
             box-shadow: 0 4px 15px rgba(167, 139, 250, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px var(--shadow);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px) scale(0.98);
         }
 
         .btn-secondary {
@@ -913,12 +1043,38 @@
         .password-content input {
             width: 100%;
             padding: 12px;
+            padding-right: 45px;
             border-radius: 12px;
             border: 1px solid rgba(167, 139, 250, 0.3);
             background: rgba(15, 23, 42, 0.5);
             color: var(--text);
             margin-bottom: 20px;
             font-family: 'Poppins', sans-serif;
+        }
+
+        .password-input-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: var(--accent);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .password-error {
@@ -1041,7 +1197,12 @@
         <div class="password-content">
             <h2><i class="fas fa-lock"></i> Admin Access</h2>
             <p>Enter password to enable edit mode</p>
-            <input type="password" id="adminPassword" placeholder="Enter password" onkeypress="if(event.key==='Enter') verifyPassword()">
+            <div class="password-input-wrapper">
+                <input type="password" id="adminPassword" placeholder="Enter password" onkeypress="if(event.key==='Enter') verifyPassword()">
+                <button class="password-toggle" onclick="togglePasswordVisibility()" type="button">
+                    <i class="fas fa-eye" id="passwordToggleIcon"></i>
+                </button>
+            </div>
             <p class="password-error" id="passwordError">Incorrect password!</p>
             <div class="form-actions">
                 <button class="btn btn-cancel" onclick="closePasswordModal()">Cancel</button>
@@ -1500,7 +1661,43 @@
             renderProjects();
             renderBlogs();
             setInterval(animateParticles, 50);
+            addCursorTrail();
+            addCardMouseTracking();
         });
+
+        // Cursor trail effect
+        function addCursorTrail() {
+            let lastTime = 0;
+            const throttleDelay = 50; // Create trail every 50ms
+            
+            document.addEventListener('mousemove', (e) => {
+                const currentTime = Date.now();
+                if (currentTime - lastTime < throttleDelay) return;
+                lastTime = currentTime;
+                
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.style.left = e.clientX - 10 + 'px';
+                trail.style.top = e.clientY - 10 + 'px';
+                document.body.appendChild(trail);
+                
+                setTimeout(() => trail.remove(), 800);
+            });
+        }
+
+        // Card mouse tracking for glow effect
+        function addCardMouseTracking() {
+            document.addEventListener('mousemove', (e) => {
+                const cards = document.querySelectorAll('.card, .project-card, .blog-card');
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    card.style.setProperty('--mouse-x', x + '%');
+                    card.style.setProperty('--mouse-y', y + '%');
+                });
+            });
+        }
 
         // Create floating particles
         function createParticles() {
@@ -1551,6 +1748,21 @@
         }
 
         // Password
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('adminPassword');
+            const toggleIcon = document.getElementById('passwordToggleIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
         function requestEditMode() {
             if (isEditMode) {
                 toggleEditMode();
@@ -1692,9 +1904,9 @@
         function previewProfileImage(event) {
             const file = event.target.files[0];
             if (file) {
-                // Check file size
-                if (file.size > 500000) {
-                    alert('Image is too large! Please use an image smaller than 500KB, or compress it first.');
+                // Allow up to 8MB
+                if (file.size > 8000000) {
+                    alert('Image is too large! Please use an image smaller than 8MB.');
                     event.target.value = '';
                     return;
                 }
@@ -1822,16 +2034,16 @@
         function previewImage(event, previewId) {
             const file = event.target.files[0];
             if (file) {
-                // Check file size (max 500KB for each image to avoid localStorage limit)
-                if (file.size > 500000) {
-                    alert('Image is too large! Please use an image smaller than 500KB, or compress it first.');
+                // Allow up to 8MB files
+                if (file.size > 8000000) {
+                    alert('Image is too large! Please use an image smaller than 8MB.');
                     event.target.value = '';
                     return;
                 }
                 
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    // Compress image
+                    // Compress image more intelligently
                     compressImage(e.target.result, (compressed) => {
                         const preview = document.getElementById(previewId);
                         preview.src = compressed;
@@ -1855,8 +2067,8 @@
                 let width = img.width;
                 let height = img.height;
                 
-                // Resize if too large
-                const maxSize = 800;
+                // Resize intelligently based on original size
+                const maxSize = 1200; // Increased for better quality
                 if (width > maxSize || height > maxSize) {
                     if (width > height) {
                         height = (height / width) * maxSize;
@@ -1870,10 +2082,14 @@
                 canvas.width = width;
                 canvas.height = height;
                 const ctx = canvas.getContext('2d');
+                
+                // Use better image smoothing
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = 'high';
                 ctx.drawImage(img, 0, 0, width, height);
                 
-                // Compress to JPEG with quality 0.7
-                const compressed = canvas.toDataURL('image/jpeg', 0.7);
+                // Compress to JPEG with quality 0.8 (better quality)
+                const compressed = canvas.toDataURL('image/jpeg', 0.8);
                 callback(compressed);
             };
             img.src = base64;
