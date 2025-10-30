@@ -25,13 +25,14 @@
         @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; } }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
         nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: calc(100% - 40px); max-width: 1200px; background: rgba(30, 41, 59, 0.3); backdrop-filter: blur(20px); border: 1px solid rgba(167, 139, 250, 0.2); border-radius: 20px; z-index: 1000; padding: 15px 30px; }
-        nav .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        nav .nav-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
         .logo { font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-buttons { display: flex; gap: 10px; }
         .edit-mode-toggle { background: linear-gradient(135deg, var(--primary), var(--accent)); border: none; padding: 10px 20px; border-radius: 25px; color: white; cursor: pointer; font-weight: 600; font-family: 'Poppins', sans-serif; }
         .edit-mode-toggle.active { background: linear-gradient(135deg, #ef4444, #dc2626); }
         section { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; position: relative; }
         .hero { text-align: center; }
-        .profile-img { width: 220px; height: 220px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 5rem; color: white; margin: 0 auto 30px; animation: profileFloat 4s ease-in-out infinite; border: 4px solid rgba(167, 139, 250, 0.3); }
+        .profile-img { width: 220px; height: 220px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 5rem; color: white; margin: 0 auto 30px; animation: profileFloat 4s ease-in-out infinite; border: 4px solid rgba(167, 139, 250, 0.3); overflow: hidden; }
         @keyframes profileFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
         .profile-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
         h1 { font-size: 3.5rem; margin-bottom: 10px; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -56,23 +57,30 @@
         .project-title, .blog-title { font-size: 1.4rem; margin-bottom: 12px; color: var(--accent); }
         .project-skills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
         .skill-tag { padding: 6px 14px; background: linear-gradient(135deg, rgba(167, 139, 250, 0.3), rgba(129, 140, 248, 0.3)); color: white; border-radius: 20px; font-size: 0.85rem; }
-        .btn { padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 500; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: 'Poppins', sans-serif; }
+        .btn { padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 500; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
         .btn-primary { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; }
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); padding: 20px; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 20px var(--shadow); }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); padding: 20px; overflow-y: auto; }
         .modal.active { display: flex; justify-content: center; align-items: center; }
         .modal-content { background: var(--card-bg); padding: 40px; border-radius: 25px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; border: 1px solid rgba(167, 139, 250, 0.3); }
         .modal-content h2 { color: var(--primary); margin-bottom: 25px; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; color: var(--text); }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid rgba(167, 139, 250, 0.3); background: rgba(15, 23, 42, 0.5); color: var(--text); font-family: 'Poppins', sans-serif; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid rgba(167, 139, 250, 0.3); background: rgba(15, 23, 42, 0.5); color: var(--text); font-family: 'Poppins', sans-serif; font-size: 1rem; }
+        .form-group textarea { min-height: 100px; resize: vertical; }
         .form-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 30px; }
         footer { background: var(--glass-bg); padding: 50px 0; text-align: center; border-top: 1px solid rgba(167, 139, 250, 0.2); position: relative; z-index: 2; }
         .edit-btn { position: absolute; top: 15px; right: 100px; background: rgba(15, 23, 42, 0.95); border: 1px solid var(--primary); color: var(--primary); padding: 8px 16px; border-radius: 20px; cursor: pointer; display: none; z-index: 10; font-family: 'Poppins', sans-serif; }
         .delete-btn { position: absolute; top: 15px; right: 15px; background: rgba(15, 23, 42, 0.95); border: 1px solid #ef4444; color: #ef4444; padding: 8px 16px; border-radius: 20px; cursor: pointer; display: none; z-index: 10; font-family: 'Poppins', sans-serif; }
         .edit-mode .edit-btn, .edit-mode .delete-btn { display: block; }
-        .add-new-btn { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; padding: 15px 35px; border-radius: 30px; cursor: pointer; font-weight: 600; display: none; margin: 0 auto 40px; font-family: 'Poppins', sans-serif; }
+        .add-new-btn { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; padding: 15px 35px; border-radius: 30px; cursor: pointer; font-weight: 600; display: none; margin: 0 auto 40px; font-family: 'Poppins', sans-serif; align-items: center; gap: 8px; }
         .edit-mode .add-new-btn { display: inline-flex; }
-        @media (max-width: 768px) { h1 { font-size: 2.5rem; } .info-cards, .projects-grid, .blogs-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { 
+            h1 { font-size: 2.5rem; } 
+            .info-cards, .projects-grid, .blogs-grid { grid-template-columns: 1fr; }
+            .nav-container { flex-direction: column; align-items: stretch; }
+            .logo { text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -99,7 +107,10 @@
     <nav>
         <div class="nav-container">
             <div class="logo" id="logoText">Mamata Yadav</div>
-            <button class="edit-mode-toggle" id="editModeBtn" onclick="requestEditMode()"><i class="fas fa-edit"></i> Edit Mode</button>
+            <div class="nav-buttons">
+                <button class="add-new-btn" style="display: none; margin: 0; padding: 10px 20px;" onclick="openHomeModal()"><i class="fas fa-user-edit"></i> Edit Profile</button>
+                <button class="edit-mode-toggle" id="editModeBtn" onclick="requestEditMode()"><i class="fas fa-edit"></i> Edit Mode</button>
+            </div>
         </div>
     </nav>
 
@@ -137,6 +148,37 @@
         </div>
     </footer>
 
+    <div class="modal" id="homeModal">
+        <div class="modal-content">
+            <h2><i class="fas fa-user-edit"></i> Edit Profile</h2>
+            <form id="homeForm" onsubmit="saveHome(event)">
+                <div class="form-group"><label>Full Name</label><input type="text" id="homeName" required></div>
+                <div class="form-group"><label>Title/Role</label><input type="text" id="homeTitle" required></div>
+                <div class="form-group"><label>Profile Description</label><textarea id="homeDesc" required></textarea></div>
+                <div class="form-group"><label>Profile Image URL (optional)</label><input type="url" id="homeImage" placeholder="https://example.com/photo.jpg"></div>
+                <div class="form-group"><label>Email</label><input type="email" id="homeEmail" required></div>
+                <div class="form-group"><label>LinkedIn URL</label><input type="url" id="homeLinkedin" required></div>
+                <div class="form-group"><label>GitHub URL</label><input type="url" id="homeGithub" required></div>
+                <div class="form-group">
+                    <label>Education (separate entries with blank line)</label>
+                    <textarea id="homeEducation" style="min-height: 120px;" placeholder="Masters in Data Science&#10;Stanford University | 2021-2023&#10;&#10;Bachelor in Computer Science&#10;MIT | 2017-2021"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Experience (separate entries with blank line)</label>
+                    <textarea id="homeExperience" style="min-height: 120px;" placeholder="Senior Data Scientist&#10;Google | 2023-Present&#10;&#10;Data Analyst&#10;Microsoft | 2021-2023"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Skills (comma separated)</label>
+                    <textarea id="homeSkills" placeholder="Python, R, SQL, Machine Learning, Deep Learning, TensorFlow"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" onclick="closeHomeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="modal" id="projectModal">
         <div class="modal-content">
             <h2 id="projectModalTitle">Add Project</h2>
@@ -144,11 +186,11 @@
                 <div class="form-group"><label>Title</label><input type="text" id="projectTitle" required></div>
                 <div class="form-group"><label>Category</label><input type="text" id="projectCategory" value="Machine Learning"></div>
                 <div class="form-group"><label>Description</label><textarea id="projectDesc" required></textarea></div>
-                <div class="form-group"><label>Skills (comma separated)</label><input type="text" id="projectSkills"></div>
+                <div class="form-group"><label>Skills (comma separated)</label><input type="text" id="projectSkills" placeholder="Python, TensorFlow, Neural Networks"></div>
                 <div class="form-group"><label>GitHub URL</label><input type="url" id="projectGithub" required></div>
                 <div class="form-actions">
                     <button type="button" class="btn" onclick="closeProjectModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
                 </div>
             </form>
         </div>
@@ -159,14 +201,25 @@
             <h2 id="blogModalTitle">Add Blog</h2>
             <form id="blogForm" onsubmit="saveBlog(event)">
                 <div class="form-group"><label>Title</label><input type="text" id="blogTitle" required></div>
-                <div class="form-group"><label>Excerpt</label><textarea id="blogExcerpt" required></textarea></div>
-                <div class="form-group"><label>Content</label><textarea id="blogContent" style="min-height: 200px;" required></textarea></div>
+                <div class="form-group"><label>Excerpt (Short Description)</label><textarea id="blogExcerpt" required></textarea></div>
+                <div class="form-group"><label>Full Content</label><textarea id="blogContent" style="min-height: 200px;" required></textarea></div>
                 <div class="form-group"><label>Date</label><input type="text" id="blogDate" value="Jan 2025"></div>
                 <div class="form-actions">
                     <button type="button" class="btn" onclick="closeBlogModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div class="modal" id="blogViewModal">
+        <div class="modal-content">
+            <h2 id="blogViewTitle"></h2>
+            <p id="blogViewDate" style="opacity: 0.7; margin-bottom: 20px;"></p>
+            <div id="blogViewContent" style="line-height: 1.8; white-space: pre-wrap;"></div>
+            <div class="form-actions" style="margin-top: 30px;">
+                <button class="btn btn-primary" onclick="closeBlogViewModal()"><i class="fas fa-times"></i> Close</button>
+            </div>
         </div>
     </div>
 
@@ -180,15 +233,34 @@
         }
 
         const defaultData = {
-            name: 'Mamata Yadav', title: 'Data Scientist & AI Developer',
-            desc: 'Passionate about transforming data into actionable insights.',
-            email: 'mamata@example.com', linkedin: 'https://linkedin.com/in/mamatayadav', github: 'https://github.com/mamatayadav',
-            education: ['Masters in Data Science\nUniversity | 2021-2023'], experience: ['Data Scientist\nCompany | 2023-Present'], skills: ['Python, R, SQL']
+            name: 'Mamata Yadav', 
+            title: 'Data Scientist & AI Developer',
+            desc: 'Passionate about transforming data into actionable insights and building intelligent systems.',
+            image: '',
+            email: 'mamata@example.com', 
+            linkedin: 'https://linkedin.com/in/mamatayadav', 
+            github: 'https://github.com/mamatayadav',
+            education: ['Masters in Data Science\nStanford University | 2021-2023'], 
+            experience: ['Senior Data Scientist\nTech Company | 2023-Present'], 
+            skills: ['Python, R, SQL, Machine Learning, TensorFlow']
         };
 
-        let homeData = defaultData;
-        let projects = [{id:1,title:'Sample Project',category:'ML',desc:'Description',skills:['Python'],github:'https://github.com'}];
-        let blogs = [{id:1,title:'Sample Blog',excerpt:'Excerpt',content:'Content',date:'Jan 2025'}];
+        let homeData = {...defaultData};
+        let projects = [{
+            id:1,
+            title:'AI-Powered Recommendation System',
+            category:'Machine Learning',
+            desc:'Built a personalized recommendation engine using collaborative filtering and deep learning techniques.',
+            skills:['Python','TensorFlow','Neural Networks'],
+            github:'https://github.com'
+        }];
+        let blogs = [{
+            id:1,
+            title:'Understanding Deep Learning: A Beginner\'s Guide',
+            excerpt:'An introduction to neural networks and how they power modern AI applications.',
+            content:'Deep learning has revolutionized the field of artificial intelligence. In this comprehensive guide, we explore the fundamentals of neural networks, backpropagation, and how to build your first deep learning model.\n\nWe\'ll cover topics like activation functions, loss functions, and optimization algorithms that are essential for training neural networks effectively.',
+            date:'Jan 2025'
+        }];
 
         async function loadData() {
             try {
@@ -198,7 +270,9 @@
                 if (h) homeData = JSON.parse(h.value);
                 if (p) projects = JSON.parse(p.value);
                 if (b) blogs = JSON.parse(b.value);
-            } catch(e) { console.log('Using defaults'); }
+            } catch(e) { 
+                console.log('Using default data'); 
+            }
             render();
         }
 
@@ -206,7 +280,10 @@
             try {
                 await window.storage.set(k, JSON.stringify(d), true);
                 return true;
-            } catch(e) { alert('Save error'); return false; }
+            } catch(e) { 
+                alert('Save error: ' + e.message); 
+                return false; 
+            }
         }
 
         function render() {
@@ -215,36 +292,61 @@
             document.getElementById('heroTitle').textContent = homeData.title;
             document.getElementById('heroDesc').textContent = homeData.desc;
             document.getElementById('footerName').textContent = homeData.name;
-            const social = `<a href="mailto:${homeData.email}"><i class="fas fa-envelope"></i></a><a href="${homeData.linkedin}" target="_blank"><i class="fab fa-linkedin"></i></a><a href="${homeData.github}" target="_blank"><i class="fab fa-github"></i></a>`;
+            
+            const profileImg = document.getElementById('profileImg');
+            if (homeData.image && homeData.image.trim() !== '') {
+                profileImg.innerHTML = `<img src="${homeData.image}" alt="${homeData.name}">`;
+            } else {
+                profileImg.innerHTML = '<i class="fas fa-user"></i>';
+            }
+            
+            const social = `
+                <a href="mailto:${homeData.email}" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="${homeData.linkedin}" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="${homeData.github}" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            `;
             document.getElementById('heroSocial').innerHTML = social;
             document.getElementById('footerSocial').innerHTML = social;
+            
             document.getElementById('infoCards').innerHTML = `
-                <div class="card"><h3><i class="fas fa-graduation-cap"></i> Education</h3>${homeData.education.map(e => `<div class="card-item">${e.replace(/\n/g, '<br>')}</div>`).join('')}</div>
-                <div class="card"><h3><i class="fas fa-briefcase"></i> Experience</h3>${homeData.experience.map(e => `<div class="card-item">${e.replace(/\n/g, '<br>')}</div>`).join('')}</div>
-                <div class="card"><h3><i class="fas fa-code"></i> Skills</h3>${homeData.skills.map(s => `<div class="card-item">${s}</div>`).join('')}</div>`;
+                <div class="card">
+                    <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                    ${homeData.education.map(e => `<div class="card-item">${e.replace(/\n/g, '<br>')}</div>`).join('')}
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-briefcase"></i> Experience</h3>
+                    ${homeData.experience.map(e => `<div class="card-item">${e.replace(/\n/g, '<br>')}</div>`).join('')}
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-code"></i> Skills</h3>
+                    ${homeData.skills.map(s => `<div class="card-item">${s}</div>`).join('')}
+                </div>
+            `;
+            
             document.getElementById('projectsGrid').innerHTML = projects.map(p => `
                 <div class="project-card">
-                    <button class="edit-btn" onclick="editProject(${p.id})">Edit</button>
-                    <button class="delete-btn" onclick="deleteProject(${p.id})">Delete</button>
+                    <button class="edit-btn" onclick="editProject(${p.id})"><i class="fas fa-edit"></i> Edit</button>
+                    <button class="delete-btn" onclick="deleteProject(${p.id})"><i class="fas fa-trash"></i> Delete</button>
                     <div class="project-img"><i class="fas fa-brain"></i></div>
                     <div class="project-content">
                         <span class="project-category">${p.category}</span>
                         <h3 class="project-title">${p.title}</h3>
                         <p>${p.desc}</p>
                         <div class="project-skills">${p.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}</div>
-                        <a href="${p.github}" class="btn btn-primary" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="${p.github}" class="btn btn-primary" target="_blank"><i class="fab fa-github"></i> View on GitHub</a>
                     </div>
                 </div>
             `).join('');
+            
             document.getElementById('blogsGrid').innerHTML = blogs.map(b => `
-                <div class="blog-card">
-                    <button class="edit-btn" onclick="editBlog(${b.id})">Edit</button>
-                    <button class="delete-btn" onclick="deleteBlog(${b.id})">Delete</button>
+                <div class="blog-card" onclick="viewBlog(${b.id})" style="cursor: pointer;">
+                    <button class="edit-btn" onclick="event.stopPropagation(); editBlog(${b.id})"><i class="fas fa-edit"></i> Edit</button>
+                    <button class="delete-btn" onclick="event.stopPropagation(); deleteBlog(${b.id})"><i class="fas fa-trash"></i> Delete</button>
                     <div class="blog-img"><i class="fas fa-blog"></i></div>
                     <div class="blog-content">
                         <h3 class="blog-title">${b.title}</h3>
                         <p>${b.excerpt}</p>
-                        <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 10px;">${b.date}</p>
+                        <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 10px;"><i class="far fa-calendar"></i> ${b.date}</p>
                     </div>
                 </div>
             `).join('');
@@ -257,6 +359,7 @@
                 p.className = 'particle';
                 p.style.left = Math.random() * 100 + '%';
                 p.style.top = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 2 + 's';
                 c.appendChild(p);
             }
         }
@@ -274,7 +377,9 @@
             }
         }
 
-        function closePasswordModal() { document.getElementById('passwordModal').classList.remove('active'); }
+        function closePasswordModal() { 
+            document.getElementById('passwordModal').classList.remove('active'); 
+        }
 
         async function verifyPassword() {
             const h = await hashPassword(document.getElementById('adminPassword').value);
@@ -283,9 +388,50 @@
                 isEditMode = true;
                 document.body.classList.add('edit-mode');
                 document.getElementById('editModeBtn').classList.add('active');
-                document.getElementById('editModeBtn').innerHTML = '<i class="fas fa-times"></i> Exit Edit';
+                document.getElementById('editModeBtn').innerHTML = '<i class="fas fa-times"></i> Exit Edit Mode';
+                alert('Edit mode enabled! All changes will be visible to everyone.');
             } else {
                 document.getElementById('passwordError').style.display = 'block';
+            }
+        }
+
+        function openHomeModal() {
+            document.getElementById('homeName').value = homeData.name;
+            document.getElementById('homeTitle').value = homeData.title;
+            document.getElementById('homeDesc').value = homeData.desc;
+            document.getElementById('homeImage').value = homeData.image || '';
+            document.getElementById('homeEmail').value = homeData.email;
+            document.getElementById('homeLinkedin').value = homeData.linkedin;
+            document.getElementById('homeGithub').value = homeData.github;
+            document.getElementById('homeEducation').value = homeData.education.join('\n\n');
+            document.getElementById('homeExperience').value = homeData.experience.join('\n\n');
+            document.getElementById('homeSkills').value = homeData.skills.join(', ');
+            document.getElementById('homeModal').classList.add('active');
+        }
+
+        function closeHomeModal() {
+            document.getElementById('homeModal').classList.remove('active');
+        }
+
+        async function saveHome(e) {
+            e.preventDefault();
+            homeData = {
+                name: document.getElementById('homeName').value,
+                title: document.getElementById('homeTitle').value,
+                desc: document.getElementById('homeDesc').value,
+                image: document.getElementById('homeImage').value,
+                email: document.getElementById('homeEmail').value,
+                linkedin: document.getElementById('homeLinkedin').value,
+                github: document.getElementById('homeGithub').value,
+                education: document.getElementById('homeEducation').value.split('\n\n').filter(e => e.trim()),
+                experience: document.getElementById('homeExperience').value.split('\n\n').filter(e => e.trim()),
+                skills: document.getElementById('homeSkills').value.split(',').map(s => s.trim()).filter(s => s)
+            };
+            const saved = await saveData('pf_home', homeData);
+            if (saved) {
+                render();
+                closeHomeModal();
+                alert('✅ Profile updated! Changes are now visible to everyone on all devices.');
             }
         }
 
@@ -304,7 +450,9 @@
             document.getElementById('projectModal').classList.add('active');
         }
 
-        function closeProjectModal() { document.getElementById('projectModal').classList.remove('active'); }
+        function closeProjectModal() { 
+            document.getElementById('projectModal').classList.remove('active'); 
+        }
 
         async function saveProject(e) {
             e.preventDefault();
@@ -313,7 +461,7 @@
                 title: document.getElementById('projectTitle').value,
                 category: document.getElementById('projectCategory').value,
                 desc: document.getElementById('projectDesc').value,
-                skills: document.getElementById('projectSkills').value.split(',').map(s => s.trim()),
+                skills: document.getElementById('projectSkills').value.split(',').map(s => s.trim()).filter(s => s),
                 github: document.getElementById('projectGithub').value
             };
             if (editingProjectId) {
@@ -321,19 +469,26 @@
             } else {
                 projects.push(data);
             }
-            await saveData('pf_projects', projects);
-            render();
-            closeProjectModal();
-            alert('Project saved!');
+            const saved = await saveData('pf_projects', projects);
+            if (saved) {
+                render();
+                closeProjectModal();
+                alert('✅ Project saved! Visible to everyone now.');
+            }
         }
 
-        function editProject(id) { openProjectModal(projects.find(p => p.id === id)); }
+        function editProject(id) { 
+            openProjectModal(projects.find(p => p.id === id)); 
+        }
 
         async function deleteProject(id) {
-            if (confirm('Delete?')) {
+            if (confirm('Delete this project? This action cannot be undone.')) {
                 projects = projects.filter(p => p.id !== id);
-                await saveData('pf_projects', projects);
-                render();
+                const saved = await saveData('pf_projects', projects);
+                if (saved) {
+                    render();
+                    alert('✅ Project deleted!');
+                }
             }
         }
 
@@ -351,7 +506,9 @@
             document.getElementById('blogModal').classList.add('active');
         }
 
-        function closeBlogModal() { document.getElementById('blogModal').classList.remove('active'); }
+        function closeBlogModal() { 
+            document.getElementById('blogModal').classList.remove('active'); 
+        }
 
         async function saveBlog(e) {
             e.preventDefault();
@@ -367,23 +524,48 @@
             } else {
                 blogs.push(data);
             }
-            await saveData('pf_blogs', blogs);
-            render();
-            closeBlogModal();
-            alert('Blog saved!');
-        }
-
-        function editBlog(id) { openBlogModal(blogs.find(b => b.id === id)); }
-
-        async function deleteBlog(id) {
-            if (confirm('Delete?')) {
-                blogs = blogs.filter(b => b.id !== id);
-                await saveData('pf_blogs', blogs);
+            const saved = await saveData('pf_blogs', blogs);
+            if (saved) {
                 render();
+                closeBlogModal();
+                alert('✅ Blog saved! Visible to everyone now.');
             }
         }
 
-        window.onclick = function(e) { if (e.target.classList.contains('modal')) e.target.classList.remove('active'); }
+        function editBlog(id) { 
+            openBlogModal(blogs.find(b => b.id === id)); 
+        }
+
+        async function deleteBlog(id) {
+            if (confirm('Delete this blog? This action cannot be undone.')) {
+                blogs = blogs.filter(b => b.id !== id);
+                const saved = await saveData('pf_blogs', blogs);
+                if (saved) {
+                    render();
+                    alert('✅ Blog deleted!');
+                }
+            }
+        }
+
+        function viewBlog(id) {
+            const blog = blogs.find(b => b.id === id);
+            if (blog) {
+                document.getElementById('blogViewTitle').textContent = blog.title;
+                document.getElementById('blogViewDate').textContent = blog.date;
+                document.getElementById('blogViewContent').textContent = blog.content;
+                document.getElementById('blogViewModal').classList.add('active');
+            }
+        }
+
+        function closeBlogViewModal() {
+            document.getElementById('blogViewModal').classList.remove('active');
+        }
+
+        window.onclick = function(e) { 
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active'); 
+            }
+        }
 
         createParticles();
         loadData();
