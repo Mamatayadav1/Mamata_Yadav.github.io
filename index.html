@@ -3,228 +3,300 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mamata Yadav | Portfolio</title>
+  <title>Mamata Yadav - Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
     body {
-      background: linear-gradient(to right, #e6e6fa, #d6e0ff);
       font-family: "Poppins", sans-serif;
-      color: #222;
-      margin: 0;
-      padding: 0;
     }
-    header {
-      background: #4a47a3;
-      color: white;
-      padding: 1.2rem;
-      text-align: center;
+    .gradient-bg {
+      background: linear-gradient(135deg, #1e293b 0%, #7c3aed 50%, #1e293b 100%);
     }
-    section {
-      background: white;
-      margin: 1.5rem auto;
-      width: 90%;
-      max-width: 800px;
-      padding: 1.5rem;
-      border-radius: 16px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    .card-hover {
+      transition: all 0.3s ease;
     }
-    textarea, input {
-      width: 100%;
-      font-size: 1rem;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      border: 1px solid #aaa;
-      border-radius: 8px;
-      resize: vertical;
-      background: #fafafa;
-    }
-    .controls {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    button {
-      background: #4a47a3;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-    button:hover {
-      background: #393793;
-    }
-    .hidden {
-      display: none;
+    .card-hover:hover {
+      transform: translateY(-10px);
     }
   </style>
 </head>
-<body>
-
-  <header>
-    <h1 contenteditable="false" id="home-title">Mamata Yadav</h1>
-    <p contenteditable="false" id="home-subtitle">Data Scientist & AI Developer</p>
-    <div class="controls">
-      <button id="editModeBtn">Enter Edit Mode ✏️</button>
-      <button id="publishBtn" class="hidden">Publish to GitHub 🚀</button>
-    </div>
-  </header>
-
-  <section id="home">
-    <h2>Home</h2>
-    <div contenteditable="false" id="home-content">Welcome to my portfolio! Here you’ll find my journey, projects, and thoughts.</div>
-  </section>
-
-  <section id="education">
-    <h2>Education</h2>
-    <div contenteditable="false" id="education-content">B.Sc B.Ed (PCM, Chemistry Honours) – RIE Bhubaneswar (2019–23)</div>
-  </section>
-
-  <section id="experience">
-    <h2>Experience</h2>
-    <div contenteditable="false" id="experience-content">Worked on data-driven AI models and automation projects.</div>
-  </section>
-
-  <section id="skills">
-    <h2>Skills</h2>
-    <div contenteditable="false" id="skills-content">Python, TensorFlow, Power BI, Machine Learning, Data Analysis</div>
-  </section>
-
-  <section id="projects">
-    <h2>Projects</h2>
-    <div contenteditable="false" id="projects-content">
-      Built a Movie Recommendation Engine and GDP Forecasting Model using SARIMAX.
-    </div>
-  </section>
-
-  <section id="blogs">
-    <h2>Blogs</h2>
-    <div contenteditable="false" id="blogs-content">
-      Latest blog: Understanding LoRA – a lightweight Transformer fine-tuning technique.
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <div contenteditable="false" id="contact-content">Email: mamatayadav@example.com</div>
-  </section>
+<body class="gradient-bg min-h-screen text-white">
+  <div id="app"></div>
 
   <script>
-    let editMode = false;
-    let dbPromise;
+    const ADMIN_PASSWORD = "admin123";
+    let isEditMode = false;
 
-    // Initialize IndexedDB
-    function openDatabase() {
-      if (!window.indexedDB) {
-        alert("Your browser doesn't support IndexedDB");
-        return;
-      }
+    // Load data from localStorage or defaults
+    const data = JSON.parse(localStorage.getItem("portfolio_data")) || {
+      home: {
+        name: "Mamata Yadav",
+        title: "Data Scientist & AI Developer",
+        description:
+          "Passionate about transforming data into actionable insights and building intelligent systems.",
+        email: "mamata@example.com",
+        linkedin: "https://linkedin.com/in/mamatayadav",
+        github: "https://github.com/mamatayadav",
+        education: [
+          "Master in Data Science\nUniversity | 2021-2023",
+          "Bachelor in CS\nUniversity | 2017-2021",
+        ],
+        experience: [
+          "Data Scientist\nCompany | 2023-Present",
+          "AI Intern\nCompany | 2022-2023",
+        ],
+        skills: ["Python, R, SQL", "TensorFlow, PyTorch", "Computer Vision, NLP"],
+      },
+      projects: [
+        {
+          id: 1,
+          title: "ML Project",
+          category: "Machine Learning",
+          desc: "Sample project description",
+          skills: ["Python", "Scikit-learn"],
+          github: "https://github.com",
+          icon: "🧠",
+        },
+      ],
+      blogs: [
+        {
+          id: 1,
+          title: "Sample Blog",
+          excerpt: "Blog excerpt here",
+          content: "Full blog content here",
+          date: "Jan 2025",
+          icon: "📝",
+        },
+      ],
+    };
 
-      dbPromise = new Promise((resolve, reject) => {
-        const request = indexedDB.open("PortfolioDB", 1);
+    // Save function
+    function save() {
+      localStorage.setItem("portfolio_data", JSON.stringify(data));
+      alert("✅ Saved successfully!");
+    }
 
-        request.onerror = () => reject("Failed to open IndexedDB");
-        request.onupgradeneeded = (event) => {
-          const db = event.target.result;
-          if (!db.objectStoreNames.contains("sections")) {
-            db.createObjectStore("sections", { keyPath: "id" });
+    function render() {
+      const home = data.home;
+      const app = document.getElementById("app");
+
+      app.innerHTML = `
+        <nav class="fixed top-0 left-0 right-0 bg-slate-900/80 backdrop-blur-lg border-b border-purple-500/20 z-40">
+          <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">${home.name}</h1>
+            <button onclick="toggleEditMode()" class="px-4 py-2 rounded-lg font-semibold ${
+              isEditMode
+                ? "bg-red-500 hover:bg-red-600"
+                : "bg-gradient-to-r from-purple-500 to-pink-500"
+            } transition-colors">${isEditMode ? "Exit Edit" : "Edit Mode"}</button>
+          </div>
+        </nav>
+
+        <section class="pt-32 pb-20 px-4">
+          <div class="max-w-4xl mx-auto text-center">
+            ${
+              isEditMode
+                ? '<button onclick="editHome()" class="mb-4 px-4 py-2 bg-purple-500/20 border border-purple-500 rounded-lg">✏️ Edit Home</button>'
+                : ""
+            }
+            <div class="w-48 h-48 mx-auto mb-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 p-1">
+              <div class="w-full h-full rounded-full bg-slate-800 flex items-center justify-center text-6xl">👤</div>
+            </div>
+
+            <h2 class="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">${home.name}</h2>
+            <p class="text-2xl text-purple-300 mb-6">${home.title}</p>
+            <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">${home.description}</p>
+
+            <div class="flex justify-center gap-4 mb-12">
+              <a href="mailto:${home.email}" class="p-3 bg-slate-800 rounded-full hover:bg-purple-500 transition-colors">📧</a>
+              <a href="${home.linkedin}" target="_blank" class="p-3 bg-slate-800 rounded-full hover:bg-purple-500 transition-colors">💼</a>
+              <a href="${home.github}" target="_blank" class="p-3 bg-slate-800 rounded-full hover:bg-purple-500 transition-colors">💻</a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mt-12">
+              ${createEditableCard("Education", home.education, "editEducation")}
+              ${createEditableCard("Experience", home.experience, "editExperience")}
+              ${createEditableCard("Skills", home.skills, "editSkills")}
+            </div>
+          </div>
+        </section>
+
+        ${renderProjects()}
+        ${renderBlogs()}
+
+        <footer class="py-12 px-4 bg-slate-900/80 border-t border-purple-500/20 text-center">
+          <div class="flex justify-center gap-4 mb-4">
+            <a href="mailto:${home.email}" class="p-3 bg-slate-800 rounded-full hover:bg-purple-500 transition-colors">📧</a>
+            <a href="${home.linkedin}" target="_blank" class="p-3 bg-slate-800 rounded-full hover:bg-purple-500 transition-colors">💼</a>
+            <a href="${home.github}" target="_blank" class="p-3 bg-slate-800 rounded-full hover:bg-purple-500 transition-colors">💻</a>
+          </div>
+          <p class="text-gray-400">&copy; 2025 ${home.name}. All rights reserved.</p>
+        </footer>
+
+        <div id="modal"></div>
+      `;
+    }
+
+    function createEditableCard(title, list, editFunc) {
+      return `
+        <div class="bg-slate-800/50 p-6 rounded-xl border border-purple-500/20 relative">
+          ${
+            isEditMode
+              ? `<button onclick="${editFunc}()" class="absolute top-4 right-4 text-purple-400">✏️</button>`
+              : ""
           }
-        };
-        request.onsuccess = (event) => resolve(event.target.result);
-      });
+          <h3 class="text-xl font-semibold mb-4 text-purple-400">${title}</h3>
+          ${list.map((e) => `<div class="mb-3 text-gray-300">${e.replace("\n", "<br>")}</div>`).join("")}
+        </div>
+      `;
     }
 
-    async function saveSectionData(sectionId, data) {
-      try {
-        const db = await dbPromise;
-        if (!db) throw new Error("Database not initialized.");
-
-        const tx = db.transaction("sections", "readwrite");
-        const store = tx.objectStore("sections");
-        store.put({ id: sectionId, content: data });
-
-        tx.oncomplete = () => console.log(sectionId + " saved successfully!");
-        tx.onerror = () => console.error("Transaction failed:", tx.error);
-      } catch (err) {
-        console.error("Save error:", err);
-        alert("Save error: " + err.message);
-      }
+    function renderProjects() {
+      const projects = data.projects;
+      return `
+        <section class="py-20 px-4 bg-slate-900/50">
+          <div class="max-w-6xl mx-auto">
+            <div class="flex justify-between items-center mb-12">
+              <h2 class="text-4xl font-bold">My Projects</h2>
+              ${
+                isEditMode
+                  ? '<button onclick="addProject()" class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">➕ Add Project</button>'
+                  : ""
+              }
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              ${projects
+                .map(
+                  (p) => `
+                <div class="bg-slate-800/50 rounded-xl overflow-hidden border border-purple-500/20 card-hover relative">
+                  ${
+                    isEditMode
+                      ? `
+                      <button onclick="editProject(${p.id})" class="absolute top-2 right-14 z-10 p-2 bg-slate-900/80 rounded-lg text-purple-400">✏️</button>
+                      <button onclick="deleteProject(${p.id})" class="absolute top-2 right-2 z-10 p-2 bg-slate-900/80 rounded-lg text-red-400">🗑️</button>`
+                      : ""
+                  }
+                  <div class="h-48 bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-6xl">${p.icon}</div>
+                  <div class="p-6">
+                    <span class="text-xs px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full">${p.category}</span>
+                    <h3 class="text-xl font-bold mt-3 mb-2">${p.title}</h3>
+                    <p class="text-gray-400 text-sm mb-4">${p.desc}</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      ${p.skills.map((s) => `<span class="text-xs px-2 py-1 bg-slate-700 rounded">${s}</span>`).join("")}
+                    </div>
+                    <a href="${p.github}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">View Project</a>
+                  </div>
+                </div>`
+                )
+                .join("")}
+            </div>
+          </div>
+        </section>
+      `;
     }
 
-    async function loadAllSections() {
-      const db = await dbPromise;
-      const tx = db.transaction("sections", "readonly");
-      const store = tx.objectStore("sections");
-      const request = store.getAll();
-
-      request.onsuccess = () => {
-        request.result.forEach(item => {
-          const el = document.getElementById(item.id);
-          if (el) el.innerHTML = item.content;
-        });
-      };
+    function renderBlogs() {
+      const blogs = data.blogs;
+      return `
+        <section class="py-20 px-4">
+          <div class="max-w-6xl mx-auto">
+            <div class="flex justify-between items-center mb-12">
+              <h2 class="text-4xl font-bold">Latest Blogs</h2>
+              ${
+                isEditMode
+                  ? '<button onclick="addBlog()" class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">➕ Add Blog</button>'
+                  : ""
+              }
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              ${blogs
+                .map(
+                  (b) => `
+                <div class="bg-slate-800/50 rounded-xl overflow-hidden border border-purple-500/20 card-hover relative">
+                  ${
+                    isEditMode
+                      ? `
+                      <button onclick="editBlog(${b.id})" class="absolute top-2 right-14 z-10 p-2 bg-slate-900/80 rounded-lg text-purple-400">✏️</button>
+                      <button onclick="deleteBlog(${b.id})" class="absolute top-2 right-2 z-10 p-2 bg-slate-900/80 rounded-lg text-red-400">🗑️</button>`
+                      : ""
+                  }
+                  <div class="h-48 bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-6xl">${b.icon}</div>
+                  <div class="p-6">
+                    <div class="flex justify-between text-xs text-gray-400 mb-3">
+                      <span>By: ${data.home.name}</span>
+                      <span>${b.date}</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">${b.title}</h3>
+                    <p class="text-gray-400 text-sm">${b.excerpt}</p>
+                  </div>
+                </div>`
+                )
+                .join("")}
+            </div>
+          </div>
+        </section>
+      `;
     }
 
-    // Toggle Edit Mode
-    document.getElementById("editModeBtn").addEventListener("click", () => {
-      editMode = !editMode;
-      const editables = document.querySelectorAll("[contenteditable]");
-      editables.forEach(el => el.setAttribute("contenteditable", editMode));
-
-      const btn = document.getElementById("editModeBtn");
-      const publishBtn = document.getElementById("publishBtn");
-
-      if (editMode) {
-        btn.textContent = "Exit Edit Mode 💾";
-        publishBtn.classList.remove("hidden");
-        alert("Edit Mode Activated. Click text to edit. Changes auto-save.");
+    function toggleEditMode() {
+      if (isEditMode) {
+        isEditMode = false;
+        render();
       } else {
-        btn.textContent = "Enter Edit Mode ✏️";
-        publishBtn.classList.add("hidden");
+        const pwd = prompt("Enter password:");
+        if (pwd === ADMIN_PASSWORD) {
+          isEditMode = true;
+          render();
+        } else if (pwd) alert("❌ Incorrect password!");
       }
-    });
+    }
 
-    // Auto Save on Input
-    document.body.addEventListener("input", (e) => {
-      if (!editMode) return;
-      const el = e.target;
-      if (el.id) saveSectionData(el.id, el.innerHTML);
-    });
+    // Example editable modals
+    function editHome() {
+      const modal = document.getElementById("modal");
+      const h = data.home;
+      modal.innerHTML = `
+        <div class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+          <div class="bg-slate-800 rounded-2xl p-8 max-w-2xl w-full">
+            <h2 class="text-2xl font-bold mb-6">Edit Home Section</h2>
+            <div class="space-y-4">
+              <div><label>Name</label><input id="name" value="${h.name}" class="w-full px-4 py-2 bg-slate-700 rounded-lg border border-purple-500/30"></div>
+              <div><label>Title</label><input id="title" value="${h.title}" class="w-full px-4 py-2 bg-slate-700 rounded-lg border border-purple-500/30"></div>
+              <div><label>Description</label><textarea id="desc" rows="3" class="w-full px-4 py-2 bg-slate-700 rounded-lg border border-purple-500/30">${h.description}</textarea></div>
+              <div><label>Email</label><input id="email" value="${h.email}" class="w-full px-4 py-2 bg-slate-700 rounded-lg border border-purple-500/30"></div>
+              <div><label>LinkedIn</label><input id="linkedin" value="${h.linkedin}" class="w-full px-4 py-2 bg-slate-700 rounded-lg border border-purple-500/30"></div>
+              <div><label>GitHub</label><input id="github" value="${h.github}" class="w-full px-4 py-2 bg-slate-700 rounded-lg border border-purple-500/30"></div>
+            </div>
+            <div class="flex gap-3 mt-6">
+              <button onclick="closeModal()" class="flex-1 px-4 py-2 bg-slate-700 rounded-lg">Cancel</button>
+              <button onclick="saveHome()" class="flex-1 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">Save</button>
+            </div>
+          </div>
+        </div>`;
+    }
 
-    // Publish to GitHub (using API)
-    document.getElementById("publishBtn").addEventListener("click", async () => {
-      const repo = "mamatayadav1/mamatayadav1.github.io";
-      const token = "YOUR_PERSONAL_ACCESS_TOKEN_HERE"; // never hardcode; use secrets
+    function saveHome() {
+      const h = data.home;
+      h.name = document.getElementById("name").value;
+      h.title = document.getElementById("title").value;
+      h.description = document.getElementById("desc").value;
+      h.email = document.getElementById("email").value;
+      h.linkedin = document.getElementById("linkedin").value;
+      h.github = document.getElementById("github").value;
+      save();
+      closeModal();
+      render();
+    }
 
-      const content = document.documentElement.outerHTML;
-      const encoded = btoa(unescape(encodeURIComponent(content)));
+    function closeModal() {
+      document.getElementById("modal").innerHTML = "";
+    }
 
-      try {
-        const res = await fetch(`https://api.github.com/repos/${repo}/contents/index.html`, {
-          method: "PUT",
-          headers: {
-            "Authorization": `token ${token}`,
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            message: "Updated portfolio content",
-            content: encoded,
-            sha: "", // GitHub auto-handles if omitted
-          })
-        });
-
-        if (res.ok) alert("✅ Published successfully to GitHub!");
-        else alert("❌ Publish failed. Check your token permissions.");
-      } catch (err) {
-        console.error(err);
-        alert("Publish error: " + err.message);
-      }
-    });
-
-    // Load data on startup
-    openDatabase();
-    setTimeout(loadAllSections, 500);
+    render();
   </script>
 </body>
 </html>
