@@ -1,178 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mamata Yadav | Portfolio</title>
-<style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(120deg, #e4d9ff, #f9f9ff);
-    color: #333;
-    margin: 0;
-    padding: 20px;
-  }
-  h1 {
-    text-align: center;
-    color: #5a2d82;
-  }
-  .section {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    padding: 20px;
-    margin: 20px 0;
-  }
-  textarea {
-    width: 100%;
-    height: 120px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 15px;
-    resize: vertical;
-  }
-  button {
-    background-color: #5a2d82;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 14px;
-    margin-top: 8px;
-    cursor: pointer;
-    transition: 0.2s;
-  }
-  button:hover {
-    background-color: #4b2470;
-  }
-  #publishBtn {
-    background-color: #6d3bb8;
-    display: block;
-    margin: 30px auto;
-    padding: 10px 20px;
-    font-size: 16px;
-  }
-  .msg {
-    text-align: center;
-    font-weight: 600;
-    color: green;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mamata Yadav | Portfolio</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #e6e6fa, #d6e0ff);
+      font-family: "Poppins", sans-serif;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #4a47a3;
+      color: white;
+      padding: 1.2rem;
+      text-align: center;
+    }
+    section {
+      background: white;
+      margin: 1.5rem auto;
+      width: 90%;
+      max-width: 800px;
+      padding: 1.5rem;
+      border-radius: 16px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    textarea, input {
+      width: 100%;
+      font-size: 1rem;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      border: 1px solid #aaa;
+      border-radius: 8px;
+      resize: vertical;
+      background: #fafafa;
+    }
+    .controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background: #4a47a3;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    button:hover {
+      background: #393793;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Mamata Yadav | Portfolio</h1>
+  <header>
+    <h1 contenteditable="false" id="home-title">Mamata Yadav</h1>
+    <p contenteditable="false" id="home-subtitle">Data Scientist & AI Developer</p>
+    <div class="controls">
+      <button id="editModeBtn">Enter Edit Mode ✏️</button>
+      <button id="publishBtn" class="hidden">Publish to GitHub 🚀</button>
+    </div>
+  </header>
 
-<div id="sections"></div>
-<button id="publishBtn">📤 Publish to GitHub</button>
-<div id="status" class="msg"></div>
+  <section id="home">
+    <h2>Home</h2>
+    <div contenteditable="false" id="home-content">Welcome to my portfolio! Here you’ll find my journey, projects, and thoughts.</div>
+  </section>
 
-<script>
-// --- CONFIG ---
-const SECTIONS = ["Home", "Contact", "Education", "Experience", "Skills", "Projects", "Blogs"];
-const DB_NAME = "portfolioDB";
-const STORE_NAME = "sections";
-const REPO_OWNER = "MamataYadav"; // your GitHub username
-const REPO_NAME = "mamata-yadav.github.io"; // your portfolio repo name
+  <section id="education">
+    <h2>Education</h2>
+    <div contenteditable="false" id="education-content">B.Sc B.Ed (PCM, Chemistry Honours) – RIE Bhubaneswar (2019–23)</div>
+  </section>
 
-// --- IndexedDB setup ---
-function openDB() {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, 1);
-    req.onupgradeneeded = e => e.target.result.createObjectStore(STORE_NAME);
-    req.onsuccess = e => resolve(e.target.result);
-    req.onerror = e => reject(e);
-  });
-}
+  <section id="experience">
+    <h2>Experience</h2>
+    <div contenteditable="false" id="experience-content">Worked on data-driven AI models and automation projects.</div>
+  </section>
 
-function saveSection(name, data) {
-  return openDB().then(db => {
-    const tx = db.transaction(STORE_NAME, "readwrite");
-    tx.objectStore(STORE_NAME).put(LZString.compressToUTF16(data), name);
-    return tx.complete;
-  });
-}
+  <section id="skills">
+    <h2>Skills</h2>
+    <div contenteditable="false" id="skills-content">Python, TensorFlow, Power BI, Machine Learning, Data Analysis</div>
+  </section>
 
-function loadSection(name) {
-  return openDB().then(db => {
-    return new Promise(resolve => {
-      const tx = db.transaction(STORE_NAME, "readonly");
-      const req = tx.objectStore(STORE_NAME).get(name);
-      req.onsuccess = () => resolve(LZString.decompressFromUTF16(req.result || ""));
+  <section id="projects">
+    <h2>Projects</h2>
+    <div contenteditable="false" id="projects-content">
+      Built a Movie Recommendation Engine and GDP Forecasting Model using SARIMAX.
+    </div>
+  </section>
+
+  <section id="blogs">
+    <h2>Blogs</h2>
+    <div contenteditable="false" id="blogs-content">
+      Latest blog: Understanding LoRA – a lightweight Transformer fine-tuning technique.
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div contenteditable="false" id="contact-content">Email: mamatayadav@example.com</div>
+  </section>
+
+  <script>
+    let editMode = false;
+    let dbPromise;
+
+    // Initialize IndexedDB
+    function openDatabase() {
+      if (!window.indexedDB) {
+        alert("Your browser doesn't support IndexedDB");
+        return;
+      }
+
+      dbPromise = new Promise((resolve, reject) => {
+        const request = indexedDB.open("PortfolioDB", 1);
+
+        request.onerror = () => reject("Failed to open IndexedDB");
+        request.onupgradeneeded = (event) => {
+          const db = event.target.result;
+          if (!db.objectStoreNames.contains("sections")) {
+            db.createObjectStore("sections", { keyPath: "id" });
+          }
+        };
+        request.onsuccess = (event) => resolve(event.target.result);
+      });
+    }
+
+    async function saveSectionData(sectionId, data) {
+      try {
+        const db = await dbPromise;
+        if (!db) throw new Error("Database not initialized.");
+
+        const tx = db.transaction("sections", "readwrite");
+        const store = tx.objectStore("sections");
+        store.put({ id: sectionId, content: data });
+
+        tx.oncomplete = () => console.log(sectionId + " saved successfully!");
+        tx.onerror = () => console.error("Transaction failed:", tx.error);
+      } catch (err) {
+        console.error("Save error:", err);
+        alert("Save error: " + err.message);
+      }
+    }
+
+    async function loadAllSections() {
+      const db = await dbPromise;
+      const tx = db.transaction("sections", "readonly");
+      const store = tx.objectStore("sections");
+      const request = store.getAll();
+
+      request.onsuccess = () => {
+        request.result.forEach(item => {
+          const el = document.getElementById(item.id);
+          if (el) el.innerHTML = item.content;
+        });
+      };
+    }
+
+    // Toggle Edit Mode
+    document.getElementById("editModeBtn").addEventListener("click", () => {
+      editMode = !editMode;
+      const editables = document.querySelectorAll("[contenteditable]");
+      editables.forEach(el => el.setAttribute("contenteditable", editMode));
+
+      const btn = document.getElementById("editModeBtn");
+      const publishBtn = document.getElementById("publishBtn");
+
+      if (editMode) {
+        btn.textContent = "Exit Edit Mode 💾";
+        publishBtn.classList.remove("hidden");
+        alert("Edit Mode Activated. Click text to edit. Changes auto-save.");
+      } else {
+        btn.textContent = "Enter Edit Mode ✏️";
+        publishBtn.classList.add("hidden");
+      }
     });
-  });
-}
 
-// --- UI creation ---
-async function createSections() {
-  const container = document.getElementById("sections");
-  for (const sec of SECTIONS) {
-    const div = document.createElement("div");
-    div.className = "section";
-    div.innerHTML = `<h2>${sec}</h2>
-      <textarea id="txt-${sec}"></textarea><br>
-      <button onclick="save('${sec}')">💾 Save</button>`;
-    container.appendChild(div);
-    const data = await loadSection(sec);
-    if (data) document.getElementById(`txt-${sec}`).value = data;
-  }
-}
+    // Auto Save on Input
+    document.body.addEventListener("input", (e) => {
+      if (!editMode) return;
+      const el = e.target;
+      if (el.id) saveSectionData(el.id, el.innerHTML);
+    });
 
-async function save(section) {
-  const val = document.getElementById(`txt-${section}`).value;
-  await saveSection(section, val);
-  showStatus(`✅ Saved ${section}`);
-}
+    // Publish to GitHub (using API)
+    document.getElementById("publishBtn").addEventListener("click", async () => {
+      const repo = "mamatayadav1/mamatayadav1.github.io";
+      const token = "YOUR_PERSONAL_ACCESS_TOKEN_HERE"; // never hardcode; use secrets
 
-// --- Publish to GitHub ---
-async function publishToGitHub() {
-  const token = prompt("Enter your GitHub Personal Access Token (not stored):");
-  if (!token) return showStatus("❌ Publish cancelled");
+      const content = document.documentElement.outerHTML;
+      const encoded = btoa(unescape(encodeURIComponent(content)));
 
-  const data = {};
-  for (const sec of SECTIONS) {
-    data[sec] = document.getElementById(`txt-${sec}`).value;
-  }
+      try {
+        const res = await fetch(`https://api.github.com/repos/${repo}/contents/index.html`, {
+          method: "PUT",
+          headers: {
+            "Authorization": `token ${token}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: "Updated portfolio content",
+            content: encoded,
+            sha: "", // GitHub auto-handles if omitted
+          })
+        });
 
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-  const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/portfolio_edits.json`;
+        if (res.ok) alert("✅ Published successfully to GitHub!");
+        else alert("❌ Publish failed. Check your token permissions.");
+      } catch (err) {
+        console.error(err);
+        alert("Publish error: " + err.message);
+      }
+    });
 
-  const getResp = await fetch(url, {
-    headers: { Authorization: `token ${token}` }
-  });
-  const fileInfo = getResp.ok ? await getResp.json() : {};
-  const sha = fileInfo.sha || null;
-
-  const putResp = await fetch(url, {
-    method: "PUT",
-    headers: {
-      "Authorization": `token ${token}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      message: "Update portfolio edits",
-      content,
-      sha
-    })
-  });
-
-  if (putResp.ok) showStatus("🎉 Successfully published to GitHub!");
-  else showStatus("⚠️ Publish failed — check token or repo name.");
-}
-
-function showStatus(msg) {
-  document.getElementById("status").innerText = msg;
-  setTimeout(() => document.getElementById("status").innerText = "", 5000);
-}
-
-// --- Compression Library (LZString, minimal build) ---
-const LZString=function(){function o(o,r){if(!t[o]){t[o]={};for(var n=0;n<o.length;n++)t[o][o.charAt(n)]=n}return t[o][r]}var r=String.fromCharCode,n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$",t={},e={compressToUTF16:function(o){if(null==o)return"";var t,e,i,s={},p={},u="",a="",c="",l=2,f=3,h=2,d=[],m=0,v=0;for(i=0;i<o.length;i+=1)if(u=o.charAt(i),Object.prototype.hasOwnProperty.call(s,u)||(s[u]=f++,p[u]=!0),a=c+u,Object.prototype.hasOwnProperty.call(s,a))c=a;else{if(Object.prototype.hasOwnProperty.call(p,c)){if(c.charCodeAt(0)<256){for(t=0;t<h;t++)m<<=1,v==15?(v=0,d.push(r(m)),m=0):v++;for(e=c.charCodeAt(0),t=0;t<8;t++)m=m<<1|1&e,v==15?(v=0,d.push(r(m)),m=0):v++,e>>=1}else{for(e=1,t=0;t<h;t++)m=m<<1|e,v==15?(v=0,d.push(r(m)),m=0):v++,e=0;for(e=c.charCodeAt(0),t=0;t<16;t++)m=m<<1|1&e,v==15?(v=0,d.push(r(m)),m=0):v++,e>>=1}h++,delete p[c]}else for(e=s[c],t=0;t<h;t++)m=m<<1|1&e,v==15?(v=0,d.push(r(m)),m=0):v++,e>>=1;--h,0==--f&&(h++),s[a]=f++,c=String.fromCharCode(e)}if(""!==c){if(Object.prototype.hasOwnProperty.call(p,c)){if(c.charCodeAt(0)<256){for(t=0;t<h;t++)m<<=1,v==15?(v=0,d.push(r(m)),m=0):v++;for(e=c.charCodeAt(0),t=0;t<8;t++)m=m<<1|1&e,v==15?(v=0,d.push(r(m)),m=0):v++,e>>=1}else{for(e=1,t=0;t<h;t++)m=m<<1|e,v==15?(v=0,d.push(r(m)),m=0):v++,e=0;for(e=c.charCodeAt(0),t=0;t<16;t++)m=m<<1|1&e,v==15?(v=0,d.push(r(m)),m=0):v++,e>>=1}h++,delete p[c]}else for(e=s[c],t=0;t<h;t++)m=m<<1|1&e,v==15?(v=0,d.push(r(m)),m=0):v++,e>>=1}for(;m;)m<<=1,v==15?(v=0,d.push(r(m)),m=0):v++;return d.push(r(m)),d.join("")},decompressFromUTF16:function(o){if(null==o)return"";for(var t,n,e,i,s,p,u,a="",c=0,l=0,f=0,h=[],d=0;d<o.length;d++){if(f=(o.charCodeAt(d)-32)&65535,0==c?(c=15,t=f):(t=f<<c|t,n+=16,c-=16),c<0&&(c=0));for(;c>=8;)n|=(t&255)<<c-8,h.push(String.fromCharCode(t&255)),t>>=8,c-=8;if(d==o.length-1&&c>0){for(;c>0;)n|=(t&255)<<c-8,h.push(String.fromCharCode(t&255)),t>>=8,c-=8}}return decodeURIComponent(escape(h.join("")))}};
-return e;}();
-
-// --- Start ---
-createSections();
-document.getElementById("publishBtn").addEventListener("click", publishToGitHub);
-</script>
-
+    // Load data on startup
+    openDatabase();
+    setTimeout(loadAllSections, 500);
+  </script>
 </body>
 </html>
