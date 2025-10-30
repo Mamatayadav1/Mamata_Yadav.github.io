@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mamata Yadav - Portfolio</title>
+    <title>Mamata Yadav - Data Scientist & AI Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,10 +11,10 @@
         :root {
             --primary: #a78bfa; --secondary: #818cf8; --accent: #c084fc;
             --text: #e5e7eb; --dark-bg: #0f172a; --card-bg: rgba(30, 41, 59, 0.7);
-            --glass-bg: rgba(30, 41, 59, 0.4); --light: #334155; --shadow: rgba(167, 139, 250, 0.3);
+            --glass-bg: rgba(30, 41, 59, 0.4); --shadow: rgba(167, 139, 250, 0.3);
         }
         body { font-family: 'Poppins', sans-serif; color: var(--text); background: #0a0e1a; overflow-x: hidden; }
-        .animated-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: linear-gradient(45deg, #0a0e1a 0%, #1a1f3a 50%, #0a0e1a 100%); }
+        .animated-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
         .gradient-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6; animation: float 20s infinite ease-in-out; }
         .orb1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(167, 139, 250, 0.4), transparent); top: -200px; left: -200px; }
         .orb2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(129, 140, 248, 0.3), transparent); bottom: -150px; right: -150px; animation-delay: 7s; }
@@ -22,156 +22,57 @@
         @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(100px, -100px) scale(1.1); } 66% { transform: translate(-50px, 100px) scale(0.9); } }
         .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
         .particle { position: absolute; width: 4px; height: 4px; background: rgba(167, 139, 250, 0.8); border-radius: 50%; box-shadow: 0 0 10px rgba(167, 139, 250, 0.5); animation: twinkle 2s infinite alternate; }
-        @keyframes twinkle { 0% { opacity: 0.3; transform: scale(1); } 100% { opacity: 1; transform: scale(1.5); } }
-        .cursor-trail { position: fixed; width: 20px; height: 20px; border-radius: 50%; background: radial-gradient(circle, rgba(167, 139, 250, 0.6), transparent); pointer-events: none; z-index: 9999; animation: cursorFade 0.8s ease-out forwards; }
-        @keyframes cursorFade { to { opacity: 0; transform: scale(2); } }
+        @keyframes twinkle { 0% { opacity: 0.3; } 100% { opacity: 1; } }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
-        nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: calc(100% - 40px); max-width: 1200px; background: rgba(30, 41, 59, 0.3); backdrop-filter: blur(20px); border: 1px solid rgba(167, 139, 250, 0.2); border-radius: 20px; z-index: 1000; padding: 15px 30px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); }
+        nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: calc(100% - 40px); max-width: 1200px; background: rgba(30, 41, 59, 0.3); backdrop-filter: blur(20px); border: 1px solid rgba(167, 139, 250, 0.2); border-radius: 20px; z-index: 1000; padding: 15px 30px; }
         nav .nav-container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; transition: transform 0.3s ease; }
-        .logo:hover { transform: scale(1.05); }
-        .nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
-        .nav-links a { text-decoration: none; color: var(--text); font-weight: 500; transition: all 0.3s ease; position: relative; }
-        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: width 0.3s ease; }
-        .nav-links a:hover::after { width: 100%; }
-        .edit-mode-toggle { background: linear-gradient(135deg, var(--primary), var(--accent)); border: none; padding: 10px 20px; border-radius: 25px; color: white; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px var(--shadow); font-family: 'Poppins', sans-serif; }
-        .edit-mode-toggle:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--shadow); }
+        .logo { font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .edit-mode-toggle { background: linear-gradient(135deg, var(--primary), var(--accent)); border: none; padding: 10px 20px; border-radius: 25px; color: white; cursor: pointer; font-weight: 600; font-family: 'Poppins', sans-serif; }
         .edit-mode-toggle.active { background: linear-gradient(135deg, #ef4444, #dc2626); }
-        .mobile-menu { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-        .mobile-menu span { width: 25px; height: 3px; background: var(--text); transition: all 0.3s ease; border-radius: 3px; }
         section { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; position: relative; }
         .hero { text-align: center; }
-        .profile-container { position: relative; display: inline-block; margin-bottom: 30px; }
-        .profile-img { width: 220px; height: 220px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 5rem; color: white; box-shadow: 0 20px 60px var(--shadow); animation: profileFloat 4s ease-in-out infinite; position: relative; overflow: hidden; border: 4px solid rgba(167, 139, 250, 0.3); }
+        .profile-img { width: 220px; height: 220px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center; font-size: 5rem; color: white; margin: 0 auto 30px; animation: profileFloat 4s ease-in-out infinite; border: 4px solid rgba(167, 139, 250, 0.3); }
+        @keyframes profileFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
         .profile-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-        .profile-img::before { content: ''; position: absolute; width: 100%; height: 100%; background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent); transform: translateX(-100%); animation: shine 3s infinite; }
-        @keyframes profileFloat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } }
-        @keyframes shine { 100% { transform: translateX(100%); } }
-        .edit-profile-btn { position: absolute; bottom: 10px; right: 10px; background: var(--primary); border: none; width: 40px; height: 40px; border-radius: 50%; color: white; cursor: pointer; display: none; align-items: center; justify-content: center; box-shadow: 0 4px 15px var(--shadow); transition: all 0.3s ease; }
-        .edit-mode .edit-profile-btn { display: flex; }
-        .edit-profile-btn:hover { transform: scale(1.1); }
-        h1 { font-size: 3.5rem; margin-bottom: 10px; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: glow 2s ease-in-out infinite, slideDown 0.8s ease-out; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glow { 0%, 100% { filter: drop-shadow(0 0 5px rgba(167, 139, 250, 0.5)); } 50% { filter: drop-shadow(0 0 20px rgba(167, 139, 250, 0.8)); } }
-        .subtitle { font-size: 1.6rem; color: var(--accent); margin-bottom: 20px; animation: slideDown 0.8s ease-out 0.2s backwards; }
-        .description { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto; animation: slideDown 0.8s ease-out 0.3s backwards; }
+        h1 { font-size: 3.5rem; margin-bottom: 10px; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1.6rem; color: var(--accent); margin-bottom: 20px; }
+        .description { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.9; max-width: 700px; margin-left: auto; margin-right: auto; }
         .social-links { display: flex; gap: 20px; justify-content: center; margin-top: 30px; }
-        .social-links a { width: 55px; height: 55px; border-radius: 50%; background: var(--glass-bg); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.3rem; transition: all 0.4s ease; border: 1px solid rgba(167, 139, 250, 0.2); position: relative; overflow: hidden; }
-        .social-links a::before { content: ''; position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, var(--primary), var(--accent)); transform: scale(0); transition: transform 0.4s ease; border-radius: 50%; }
-        .social-links a:hover::before { transform: scale(1); }
-        .social-links a:hover { transform: translateY(-10px) rotate(360deg); box-shadow: 0 15px 35px var(--shadow); color: white; }
-        .social-links a i { position: relative; z-index: 1; }
+        .social-links a { width: 55px; height: 55px; border-radius: 50%; background: var(--glass-bg); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.3rem; transition: all 0.4s ease; border: 1px solid rgba(167, 139, 250, 0.2); }
+        .social-links a:hover { transform: translateY(-10px); background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; }
         .info-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px; }
-        .card { background: var(--glass-bg); backdrop-filter: blur(20px); padding: 35px; border-radius: 25px; border: 1px solid rgba(167, 139, 250, 0.2); transition: all 0.4s ease; position: relative; overflow: hidden; transform-style: preserve-3d; animation: slideInUp 0.6s ease-out backwards; }
-        @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        .card:nth-child(1) { animation-delay: 0.1s; }
-        .card:nth-child(2) { animation-delay: 0.2s; }
-        .card:nth-child(3) { animation-delay: 0.3s; }
-        .card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(167, 139, 250, 0.1), transparent); transform: rotate(45deg); transition: all 0.6s ease; }
-        .card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(167, 139, 250, 0.15), transparent 50%); opacity: 0; transition: opacity 0.3s ease; }
-        .card:hover::after { opacity: 1; }
-        .card:hover::before { left: 100%; }
-        .card:hover { transform: translateY(-15px) rotateX(5deg) scale(1.02); box-shadow: 0 20px 60px var(--shadow); border-color: rgba(167, 139, 250, 0.5); }
-        .card h3 { color: var(--primary); margin-bottom: 20px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; position: relative; animation: fadeIn 0.5s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .card-item { margin-bottom: 15px; padding-left: 20px; position: relative; transition: all 0.3s ease; animation: slideInLeft 0.5s ease-out backwards; }
-        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-        .card-item:nth-child(2) { animation-delay: 0.1s; }
-        .card-item:nth-child(3) { animation-delay: 0.2s; }
-        .card-item:nth-child(4) { animation-delay: 0.3s; }
-        .card-item:nth-child(5) { animation-delay: 0.4s; }
-        .card-item:nth-child(6) { animation-delay: 0.5s; }
-        .card-item::before { content: '→'; position: absolute; left: 0; color: var(--primary); transition: all 0.3s ease; }
-        .card-item:hover { padding-left: 30px; color: var(--accent); transform: translateX(5px); }
-        .card-item:hover::before { left: 5px; }
-        .edit-card-btn { position: absolute; top: 10px; right: 10px; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--primary); color: var(--primary); padding: 6px 12px; border-radius: 15px; cursor: pointer; display: none; align-items: center; gap: 5px; font-size: 0.8rem; transition: all 0.3s ease; z-index: 10; font-family: 'Poppins', sans-serif; }
-        .edit-mode .edit-card-btn { display: flex; }
-        .edit-card-btn:hover { background: var(--primary); color: white; transform: scale(1.05); }
-        .section-title { text-align: center; font-size: 3rem; margin-bottom: 60px; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; }
-        .section-title::after { content: ''; display: block; width: 100px; height: 4px; background: linear-gradient(90deg, var(--primary), var(--accent)); margin: 20px auto 0; border-radius: 2px; }
-        .edit-section-btn { position: absolute; top: 20px; right: 20px; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--primary); color: var(--primary); padding: 10px 20px; border-radius: 25px; cursor: pointer; display: none; align-items: center; gap: 8px; transition: all 0.3s ease; z-index: 10; font-family: 'Poppins', sans-serif; }
-        .edit-mode .edit-section-btn { display: flex; }
-        .edit-section-btn:hover { background: var(--primary); color: white; transform: scale(1.05); }
-        .add-new-btn { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; padding: 15px 35px; border-radius: 30px; cursor: pointer; font-weight: 600; font-size: 1rem; display: none; align-items: center; gap: 10px; margin: 0 auto 40px; transition: all 0.3s ease; box-shadow: 0 8px 25px var(--shadow); font-family: 'Poppins', sans-serif; }
-        .add-new-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 35px var(--shadow); }
-        .edit-mode .add-new-btn { display: inline-flex; }
+        .card { background: var(--glass-bg); backdrop-filter: blur(20px); padding: 35px; border-radius: 25px; border: 1px solid rgba(167, 139, 250, 0.2); transition: all 0.4s ease; }
+        .card:hover { transform: translateY(-15px); border-color: rgba(167, 139, 250, 0.5); }
+        .card h3 { color: var(--primary); margin-bottom: 20px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .card-item { margin-bottom: 15px; padding-left: 20px; position: relative; }
+        .card-item::before { content: '→'; position: absolute; left: 0; color: var(--primary); }
+        .section-title { text-align: center; font-size: 3rem; margin-bottom: 60px; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .projects-grid, .blogs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; }
-        .project-card, .blog-card { background: var(--glass-bg); backdrop-filter: blur(20px); border-radius: 25px; overflow: hidden; border: 1px solid rgba(167, 139, 250, 0.2); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; transform-style: preserve-3d; animation: fadeInScale 0.5s ease-out backwards; }
-        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        .project-card:nth-child(n) { animation-delay: calc(0.05s * (var(--i, 1))); }
-        .blog-card:nth-child(n) { animation-delay: calc(0.05s * (var(--i, 1))); }
-        .project-card::before, .blog-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(167, 139, 250, 0.1), rgba(129, 140, 248, 0.1)); opacity: 0; transition: opacity 0.4s ease; z-index: 1; }
-        .project-card:hover::before, .blog-card:hover::before { opacity: 1; }
-        .project-card:hover, .blog-card:hover { transform: translateY(-20px) rotateX(8deg) scale(1.03); box-shadow: 0 30px 80px var(--shadow); border-color: rgba(167, 139, 250, 0.6); }
-        .project-img, .blog-img { width: 100%; height: 220px; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; color: white; font-size: 3.5rem; position: relative; overflow: hidden; }
-        .project-img img, .blog-img img { width: 100%; height: 100%; object-fit: cover; }
-        .project-img::after, .blog-img::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent); transform: rotate(45deg); transition: all 0.6s ease; }
-        .project-card:hover .project-img::after, .blog-card:hover .blog-img::after { left: 100%; }
-        .project-content, .blog-content { padding: 28px; position: relative; z-index: 2; }
-        .project-category { display: inline-block; padding: 6px 16px; background: rgba(167, 139, 250, 0.2); color: var(--primary); border-radius: 20px; font-size: 0.85rem; margin-bottom: 12px; border: 1px solid rgba(167, 139, 250, 0.3); }
+        .project-card, .blog-card { background: var(--glass-bg); backdrop-filter: blur(20px); border-radius: 25px; overflow: hidden; border: 1px solid rgba(167, 139, 250, 0.2); transition: all 0.4s ease; position: relative; }
+        .project-card:hover, .blog-card:hover { transform: translateY(-20px); border-color: rgba(167, 139, 250, 0.6); }
+        .project-img, .blog-img { width: 100%; height: 220px; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; color: white; font-size: 3.5rem; }
+        .project-content, .blog-content { padding: 28px; }
+        .project-category { display: inline-block; padding: 6px 16px; background: rgba(167, 139, 250, 0.2); color: var(--primary); border-radius: 20px; font-size: 0.85rem; margin-bottom: 12px; }
         .project-title, .blog-title { font-size: 1.4rem; margin-bottom: 12px; color: var(--accent); }
-        .project-desc, .blog-excerpt { opacity: 0.85; margin-bottom: 18px; line-height: 1.6; }
         .project-skills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
-        .skill-tag { padding: 6px 14px; background: linear-gradient(135deg, rgba(167, 139, 250, 0.3), rgba(129, 140, 248, 0.3)); color: white; border-radius: 20px; font-size: 0.85rem; border: 1px solid rgba(167, 139, 250, 0.4); transition: all 0.3s ease; }
-        .skill-tag:hover { transform: scale(1.05); background: linear-gradient(135deg, var(--primary), var(--secondary)); }
-        .project-links, .blog-actions { display: flex; gap: 12px; }
-        .btn { padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-size: 0.95rem; font-family: 'Poppins', sans-serif; }
-        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; box-shadow: 0 4px 15px rgba(167, 139, 250, 0.3); position: relative; overflow: hidden; }
-        .btn-primary::before { content: ''; position: absolute; top: 50%; left: 50%; width: 0; height: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.3); transform: translate(-50%, -50%); transition: width 0.6s, height 0.6s; }
-        .btn-primary:hover::before { width: 300px; height: 300px; }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px var(--shadow); }
-        .btn-primary:active { transform: translateY(-1px) scale(0.98); }
-        .btn-secondary { background: var(--glass-bg); backdrop-filter: blur(10px); color: var(--text); border: 1px solid rgba(167, 139, 250, 0.3); }
-        .btn-secondary:hover { background: var(--accent); color: white; border-color: var(--accent); }
-        .btn-cancel { background: var(--light); color: var(--text); }
-        .btn-cancel:hover { background: #475569; }
-        .edit-btn, .delete-btn { position: absolute; top: 15px; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); border: 1px solid var(--primary); color: var(--primary); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; transition: all 0.3s ease; display: none; z-index: 10; font-family: 'Poppins', sans-serif; }
-        .edit-btn { right: 100px; }
-        .delete-btn { right: 15px; border-color: #ef4444; color: #ef4444; }
-        .edit-mode .edit-btn, .edit-mode .delete-btn { display: block; }
-        .edit-btn:hover { background: var(--primary); color: white; transform: scale(1.05); }
-        .delete-btn:hover { background: #ef4444; color: white; transform: scale(1.05); }
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); overflow-y: auto; padding: 20px; }
-        .modal.active { display: flex; justify-content: center; align-items: center; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .modal-content { background: var(--card-bg); backdrop-filter: blur(20px); padding: 40px; border-radius: 25px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6); border: 1px solid rgba(167, 139, 250, 0.3); animation: slideUp 0.4s ease; }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .modal-content h2 { color: var(--primary); margin-bottom: 25px; font-size: 2rem; }
+        .skill-tag { padding: 6px 14px; background: linear-gradient(135deg, rgba(167, 139, 250, 0.3), rgba(129, 140, 248, 0.3)); color: white; border-radius: 20px; font-size: 0.85rem; }
+        .btn { padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 500; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: 'Poppins', sans-serif; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); padding: 20px; }
+        .modal.active { display: flex; justify-content: center; align-items: center; }
+        .modal-content { background: var(--card-bg); padding: 40px; border-radius: 25px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto; border: 1px solid rgba(167, 139, 250, 0.3); }
+        .modal-content h2 { color: var(--primary); margin-bottom: 25px; }
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; color: var(--text); font-weight: 500; }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid rgba(167, 139, 250, 0.3); background: rgba(15, 23, 42, 0.5); color: var(--text); font-family: 'Poppins', sans-serif; transition: all 0.3s ease; }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 15px rgba(167, 139, 250, 0.3); }
-        .form-group textarea { min-height: 100px; resize: vertical; }
-        .image-preview { width: 100%; max-height: 200px; object-fit: contain; border-radius: 12px; margin-top: 10px; border: 1px solid rgba(167, 139, 250, 0.3); }
+        .form-group label { display: block; margin-bottom: 8px; color: var(--text); }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid rgba(167, 139, 250, 0.3); background: rgba(15, 23, 42, 0.5); color: var(--text); font-family: 'Poppins', sans-serif; }
         .form-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 30px; }
-        .password-modal { display: none; position: fixed; z-index: 3000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); justify-content: center; align-items: center; }
-        .password-modal.active { display: flex; animation: fadeIn 0.3s ease; }
-        .password-content { background: var(--card-bg); backdrop-filter: blur(20px); padding: 40px; border-radius: 25px; max-width: 400px; width: 90%; text-align: center; border: 1px solid rgba(167, 139, 250, 0.3); animation: slideUp 0.4s ease; }
-        .password-content h2 { color: var(--primary); margin-bottom: 20px; }
-        .password-input-wrapper { position: relative; width: 100%; margin-bottom: 20px; }
-        .password-input-wrapper input { width: 100%; padding: 12px; padding-right: 45px; border-radius: 12px; border: 1px solid rgba(167, 139, 250, 0.3); background: rgba(15, 23, 42, 0.5); color: var(--text); font-family: 'Poppins', sans-serif; }
-        .password-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--primary); cursor: pointer; font-size: 1.1rem; padding: 5px; transition: all 0.3s ease; }
-        .password-toggle:hover { color: var(--accent); transform: translateY(-50%) scale(1.1); }
-        .password-error { color: #ef4444; margin-bottom: 10px; display: none; }
-        footer { background: var(--glass-bg); backdrop-filter: blur(20px); padding: 50px 0; text-align: center; border-top: 1px solid rgba(167, 139, 250, 0.2); position: relative; z-index: 2; }
-        .spinner { border: 3px solid rgba(167, 139, 250, 0.3); border-top: 3px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .storage-warning { background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5; padding: 10px 15px; border-radius: 10px; margin-bottom: 15px; font-size: 0.9rem; display: none; }
-        @media (max-width: 768px) {
-            nav { top: 10px; width: calc(100% - 20px); padding: 15px 20px; }
-            .nav-links { position: fixed; top: 80px; left: -100%; width: calc(100% - 40px); margin: 0 20px; background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(20px); flex-direction: column; padding: 30px; border-radius: 20px; border: 1px solid rgba(167, 139, 250, 0.2); transition: left 0.3s ease; }
-            .nav-links.active { left: 0; }
-            .mobile-menu { display: flex; }
-            h1 { font-size: 2.5rem; }
-            .subtitle { font-size: 1.3rem; }
-            .section-title { font-size: 2rem; }
-            .profile-img { width: 180px; height: 180px; font-size: 4rem; }
-            section { padding: 100px 0 60px; }
-            .projects-grid, .blogs-grid { grid-template-columns: 1fr; }
-            .edit-btn { right: 85px; padding: 6px 12px; font-size: 0.75rem; }
-            .delete-btn { padding: 6px 12px; font-size: 0.75rem; }
-            .modal-content { padding: 25px; }
-        }
+        footer { background: var(--glass-bg); padding: 50px 0; text-align: center; border-top: 1px solid rgba(167, 139, 250, 0.2); position: relative; z-index: 2; }
+        .edit-btn { position: absolute; top: 15px; right: 100px; background: rgba(15, 23, 42, 0.95); border: 1px solid var(--primary); color: var(--primary); padding: 8px 16px; border-radius: 20px; cursor: pointer; display: none; z-index: 10; font-family: 'Poppins', sans-serif; }
+        .delete-btn { position: absolute; top: 15px; right: 15px; background: rgba(15, 23, 42, 0.95); border: 1px solid #ef4444; color: #ef4444; padding: 8px 16px; border-radius: 20px; cursor: pointer; display: none; z-index: 10; font-family: 'Poppins', sans-serif; }
+        .edit-mode .edit-btn, .edit-mode .delete-btn { display: block; }
+        .add-new-btn { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; padding: 15px 35px; border-radius: 30px; cursor: pointer; font-weight: 600; display: none; margin: 0 auto 40px; font-family: 'Poppins', sans-serif; }
+        .edit-mode .add-new-btn { display: inline-flex; }
+        @media (max-width: 768px) { h1 { font-size: 2.5rem; } .info-cards, .projects-grid, .blogs-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -182,19 +83,14 @@
     </div>
     <div class="particles" id="particles"></div>
 
-    <div class="password-modal" id="passwordModal">
-        <div class="password-content">
+    <div class="modal" id="passwordModal">
+        <div class="modal-content" style="max-width: 400px; text-align: center;">
             <h2><i class="fas fa-lock"></i> Admin Access</h2>
-            <p>Enter password to enable edit mode</p>
-            <div class="password-input-wrapper">
-                <input type="password" id="adminPassword" placeholder="Enter password" onkeypress="if(event.key==='Enter') verifyPassword()">
-                <button class="password-toggle" onclick="togglePasswordVisibility()" type="button">
-                    <i class="fas fa-eye" id="passwordToggleIcon"></i>
-                </button>
-            </div>
-            <p class="password-error" id="passwordError">Incorrect password!</p>
+            <p>Enter password: admin123</p>
+            <input type="password" id="adminPassword" style="margin: 20px 0; text-align: center;" onkeypress="if(event.key==='Enter') verifyPassword()">
+            <p id="passwordError" style="color: #ef4444; display: none;">Incorrect password!</p>
             <div class="form-actions">
-                <button class="btn btn-cancel" onclick="closePasswordModal()">Cancel</button>
+                <button class="btn" onclick="closePasswordModal()">Cancel</button>
                 <button class="btn btn-primary" onclick="verifyPassword()">Unlock</button>
             </div>
         </div>
@@ -203,40 +99,25 @@
     <nav>
         <div class="nav-container">
             <div class="logo" id="logoText">Mamata Yadav</div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" onclick="closeMenu()">Home</a></li>
-                <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
-                <li><a href="#blogs" onclick="closeMenu()">Blogs</a></li>
-                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
-                <li><button class="edit-mode-toggle" id="editModeBtn" onclick="requestEditMode()"><i class="fas fa-edit"></i> Edit Mode</button></li>
-            </ul>
-            <div class="mobile-menu" onclick="toggleMenu()">
-                <span></span><span></span><span></span>
-            </div>
+            <button class="edit-mode-toggle" id="editModeBtn" onclick="requestEditMode()"><i class="fas fa-edit"></i> Edit Mode</button>
         </div>
     </nav>
 
     <section id="home" class="hero">
-        <button class="edit-section-btn" onclick="editHomeSection()"><i class="fas fa-edit"></i> Edit Home</button>
         <div class="container">
-            <div class="hero-content">
-                <div class="profile-container">
-                    <div class="profile-img" id="profileImg"><i class="fas fa-user"></i></div>
-                    <button class="edit-profile-btn" onclick="editProfileImage()"><i class="fas fa-camera"></i></button>
-                </div>
-                <h1 id="heroName">Mamata Yadav</h1>
-                <p class="subtitle" id="heroTitle">Data Scientist & AI Developer</p>
-                <p class="description" id="heroDesc">Passionate about transforming data into actionable insights and building intelligent systems that solve real-world problems.</p>
-                <div class="social-links" id="heroSocial"></div>
-                <div class="info-cards" id="infoCards"></div>
-            </div>
+            <div class="profile-img" id="profileImg"><i class="fas fa-user"></i></div>
+            <h1 id="heroName">Mamata Yadav</h1>
+            <p class="subtitle" id="heroTitle">Data Scientist & AI Developer</p>
+            <p class="description" id="heroDesc">Passionate about transforming data into actionable insights and building intelligent systems.</p>
+            <div class="social-links" id="heroSocial"></div>
+            <div class="info-cards" id="infoCards"></div>
         </div>
     </section>
 
     <section id="projects">
         <div class="container">
             <h2 class="section-title">My Projects</h2>
-            <button class="add-new-btn" onclick="openProjectModal()"><i class="fas fa-plus"></i> Add New Project</button>
+            <button class="add-new-btn" onclick="openProjectModal()"><i class="fas fa-plus"></i> Add Project</button>
             <div class="projects-grid" id="projectsGrid"></div>
         </div>
     </section>
@@ -244,17 +125,8 @@
     <section id="blogs">
         <div class="container">
             <h2 class="section-title">Latest Blogs</h2>
-            <button class="add-new-btn" onclick="openBlogModal()"><i class="fas fa-plus"></i> Add New Blog</button>
+            <button class="add-new-btn" onclick="openBlogModal()"><i class="fas fa-plus"></i> Add Blog</button>
             <div class="blogs-grid" id="blogsGrid"></div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <button class="edit-section-btn" onclick="editContactSection()"><i class="fas fa-edit"></i> Edit Contact</button>
-        <div class="container" style="text-align: center;">
-            <h2 class="section-title">Get In Touch</h2>
-            <p class="description" id="contactDesc">Feel free to reach out for collaborations!</p>
-            <div class="social-links" id="contactSocial"></div>
         </div>
     </section>
 
@@ -265,133 +137,18 @@
         </div>
     </footer>
 
-    <div class="modal" id="homeModal">
-        <div class="modal-content">
-            <h2>Edit Home Section</h2>
-            <form id="homeForm" onsubmit="saveHomeSection(event)">
-                <div class="form-group"><label>Full Name *</label><input type="text" id="homeName" required></div>
-                <div class="form-group"><label>Professional Title *</label><input type="text" id="homeTitle" required></div>
-                <div class="form-group"><label>Description *</label><textarea id="homeDescription" required></textarea></div>
-                <div class="form-group"><label>Email</label><input type="email" id="homeEmail"></div>
-                <div class="form-group"><label>LinkedIn URL</label><input type="url" id="homeLinkedin"></div>
-                <div class="form-group"><label>GitHub URL</label><input type="url" id="homeGithub"></div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-cancel" onclick="closeHomeModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="modal" id="eduModal">
-        <div class="modal-content">
-            <h2>Edit Education</h2>
-            <form id="eduForm" onsubmit="saveEducation(event)">
-                <div class="form-group"><label>Education (one per line)</label><textarea id="eduList" rows="6" placeholder="Master's in Data Science&#10;University Name | 2021-2023"></textarea></div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-cancel" onclick="closeEduModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="modal" id="expModal">
-        <div class="modal-content">
-            <h2>Edit Experience</h2>
-            <form id="expForm" onsubmit="saveExperience(event)">
-                <div class="form-group"><label>Experience (one per line)</label><textarea id="expList" rows="6" placeholder="Data Scientist&#10;Company Name | 2023-Present"></textarea></div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-cancel" onclick="closeExpModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="modal" id="skillModal">
-        <div class="modal-content">
-            <h2>Edit Skills</h2>
-            <form id="skillForm" onsubmit="saveSkills(event)">
-                <div class="form-group"><label>Skills (one per line)</label><textarea id="skillList" rows="8" placeholder="Python, R, SQL&#10;TensorFlow, PyTorch"></textarea></div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-cancel" onclick="closeSkillModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="modal" id="profileImageModal">
-        <div class="modal-content">
-            <h2>Update Profile Image</h2>
-            <div class="storage-warning" id="profileStorageWarning">Warning: Limited storage. Image will be compressed.</div>
-            <div class="form-group">
-                <label>Upload Image (up to 8MB)</label>
-                <input type="file" id="profileImageFile" accept="image/*" onchange="previewProfileImage(event)">
-                <img id="profileImagePreview" class="image-preview" style="display:none;">
-            </div>
-            <div class="form-actions">
-                <button type="button" class="btn btn-cancel" onclick="closeProfileImageModal()">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="saveProfileImage()">Save Image</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="contactModal">
-        <div class="modal-content">
-            <h2>Edit Contact Section</h2>
-            <form id="contactForm" onsubmit="saveContactSection(event)">
-                <div class="form-group"><label>Contact Description *</label><textarea id="contactDescription" required></textarea></div>
-                <div class="form-group"><label>Email</label><input type="email" id="contactEmail"></div>
-                <div class="form-group"><label>LinkedIn URL</label><input type="url" id="contactLinkedin"></div>
-                <div class="form-group"><label>GitHub URL</label><input type="url" id="contactGithub"></div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-cancel" onclick="closeContactModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <div class="modal" id="projectModal">
         <div class="modal-content">
-            <h2 id="projectModalTitle">Add New Project</h2>
-            <div class="storage-warning" id="projectStorageWarning">Warning: Storage nearly full. Use smaller images.</div>
+            <h2 id="projectModalTitle">Add Project</h2>
             <form id="projectForm" onsubmit="saveProject(event)">
-                <div class="form-group">
-                    <label>Project Image (up to 8MB)</label>
-                    <input type="file" id="projectImageFile" accept="image/*" onchange="previewImage(event, 'project')">
-                    <img id="projectImagePreview" class="image-preview" style="display:none;">
-                </div>
-                <div class="form-group"><label>Project Title *</label><input type="text" id="projectTitle" required></div>
-                <div class="form-group">
-                    <label>Category *</label>
-                    <select id="projectCategory" required>
-                        <option value="Machine Learning">Machine Learning</option>
-                        <option value="Deep Learning">Deep Learning</option>
-                        <option value="Computer Vision">Computer Vision</option>
-                        <option value="NLP">NLP</option>
-                        <option value="Data Analytics">Data Analytics</option>
-                        <option value="AI/ML">AI/ML</option>
-                        <option value="Data Science">Data Science</option>
-                        <option value="Big Data">Big Data</option>
-                        <option value="Cloud Computing">Cloud Computing</option>
-                        <option value="Web Development">Web Development</option>
-                        <option value="Mobile Development">Mobile Development</option>
-                        <option value="IoT">IoT</option>
-                        <option value="Blockchain">Blockchain</option>
-                        <option value="Cybersecurity">Cybersecurity</option>
-                        <option value="DevOps">DevOps</option>
-                    </select>
-                </div>
-                <div class="form-group"><label>Description *</label><textarea id="projectDesc" required></textarea></div>
-                <div class="form-group"><label>Skills (comma separated)</label><input type="text" id="projectSkills" placeholder="Python, TensorFlow, Keras"></div>
-                <div class="form-group"><label>GitHub URL *</label><input type="url" id="projectGithub" required></div>
-                <div class="form-group"><label>Icon (Font Awesome class)</label><input type="text" id="projectIcon" placeholder="fa-brain" value="fa-code"></div>
+                <div class="form-group"><label>Title</label><input type="text" id="projectTitle" required></div>
+                <div class="form-group"><label>Category</label><input type="text" id="projectCategory" value="Machine Learning"></div>
+                <div class="form-group"><label>Description</label><textarea id="projectDesc" required></textarea></div>
+                <div class="form-group"><label>Skills (comma separated)</label><input type="text" id="projectSkills"></div>
+                <div class="form-group"><label>GitHub URL</label><input type="url" id="projectGithub" required></div>
                 <div class="form-actions">
-                    <button type="button" class="btn btn-cancel" onclick="closeProjectModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Project</button>
+                    <button type="button" class="btn" onclick="closeProjectModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>
@@ -399,65 +156,99 @@
 
     <div class="modal" id="blogModal">
         <div class="modal-content">
-            <h2 id="blogModalTitle">Add New Blog</h2>
-            <div class="storage-warning" id="blogStorageWarning">Warning: Storage nearly full. Use smaller images.</div>
+            <h2 id="blogModalTitle">Add Blog</h2>
             <form id="blogForm" onsubmit="saveBlog(event)">
-                <div class="form-group">
-                    <label>Blog Image (up to 8MB)</label>
-                    <input type="file" id="blogImageFile" accept="image/*" onchange="previewImage(event, 'blog')">
-                    <img id="blogImagePreview" class="image-preview" style="display:none;">
-                </div>
-                <div class="form-group"><label>Blog Title *</label><input type="text" id="blogTitle" required></div>
-                <div class="form-group"><label>Excerpt *</label><textarea id="blogExcerpt" required></textarea></div>
-                <div class="form-group"><label>Full Content *</label><textarea id="blogContent" style="min-height: 200px;" required></textarea></div>
-                <div class="form-group"><label>Date</label><input type="text" id="blogDate" placeholder="Jan 2025" required></div>
-                <div class="form-group"><label>Icon (Font Awesome class)</label><input type="text" id="blogIcon" placeholder="fa-lightbulb" value="fa-blog"></div>
+                <div class="form-group"><label>Title</label><input type="text" id="blogTitle" required></div>
+                <div class="form-group"><label>Excerpt</label><textarea id="blogExcerpt" required></textarea></div>
+                <div class="form-group"><label>Content</label><textarea id="blogContent" style="min-height: 200px;" required></textarea></div>
+                <div class="form-group"><label>Date</label><input type="text" id="blogDate" value="Jan 2025"></div>
                 <div class="form-actions">
-                    <button type="button" class="btn btn-cancel" onclick="closeBlogModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Blog</button>
+                    <button type="button" class="btn" onclick="closeBlogModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div class="modal" id="blogDetailModal">
-        <div class="modal-content">
-            <div id="blogDetailContent"></div>
-            <div class="form-actions">
-                <button class="btn btn-primary" onclick="closeBlogDetail()">Close</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        const ADMIN_PASSWORD_HASH = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9';
+        const PASS = '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9';
         let isEditMode = false, editingProjectId = null, editingBlogId = null;
-        let currentProfileImage = null, currentProjectImage = null, currentBlogImage = null;
 
         async function hashPassword(p) {
             const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(p));
             return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2, '0')).join('');
         }
 
-        const defaultHomeData = {
+        const defaultData = {
             name: 'Mamata Yadav', title: 'Data Scientist & AI Developer',
-            description: 'Passionate about transforming data into actionable insights and building intelligent systems.',
+            desc: 'Passionate about transforming data into actionable insights.',
             email: 'mamata@example.com', linkedin: 'https://linkedin.com/in/mamatayadav', github: 'https://github.com/mamatayadav',
-            profileImage: null,
-            education: ['Master\'s in Data Science\nUniversity Name | 2021-2023', 'Bachelor\'s in Computer Science\nUniversity Name | 2017-2021'],
-            experience: ['Data Scientist\nCompany Name | 2023-Present', 'AI Intern\nCompany Name | 2022-2023'],
-            skills: ['Python, R, SQL', 'TensorFlow, PyTorch, Keras', 'Computer Vision, NLP']
+            education: ['Masters in Data Science\nUniversity | 2021-2023'], experience: ['Data Scientist\nCompany | 2023-Present'], skills: ['Python, R, SQL']
         };
 
-        let homeData = JSON.parse(localStorage.getItem('homeData')) || defaultHomeData;
-        let contactData = JSON.parse(localStorage.getItem('contactData')) || {description: 'Feel free to reach out!', email: homeData.email, linkedin: homeData.linkedin, github: homeData.github};
-        let projects = JSON.parse(localStorage.getItem('projects')) || [{id:1,title:'Sample Project',category:'Machine Learning',desc:'Project description',skills:['Python'],github:'https://github.com',icon:'fa-brain',image:null}];
-        let blogs = JSON.parse(localStorage.getItem('blogs')) || [{id:1,title:'Sample Blog',excerpt:'Blog excerpt',content:'Blog content',date:'Jan 2025',icon:'fa-blog',image:null}];
+        let homeData = defaultData;
+        let projects = [{id:1,title:'Sample Project',category:'ML',desc:'Description',skills:['Python'],github:'https://github.com'}];
+        let blogs = [{id:1,title:'Sample Blog',excerpt:'Excerpt',content:'Content',date:'Jan 2025'}];
 
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles(); renderHome(); renderContact(); renderProjects(); renderBlogs();
-            setInterval(animateParticles, 50); addCursorTrail(); addCardMouseTracking();
-        });
+        async function loadData() {
+            try {
+                const h = await window.storage.get('pf_home', true);
+                const p = await window.storage.get('pf_projects', true);
+                const b = await window.storage.get('pf_blogs', true);
+                if (h) homeData = JSON.parse(h.value);
+                if (p) projects = JSON.parse(p.value);
+                if (b) blogs = JSON.parse(b.value);
+            } catch(e) { console.log('Using defaults'); }
+            render();
+        }
+
+        async function saveData(k, d) {
+            try {
+                await window.storage.set(k, JSON.stringify(d), true);
+                return true;
+            } catch(e) { alert('Save error'); return false; }
+        }
+
+        function render() {
+            document.getElementById('logoText').textContent = homeData.name;
+            document.getElementById('heroName').textContent = homeData.name;
+            document.getElementById('heroTitle').textContent = homeData.title;
+            document.getElementById('heroDesc').textContent = homeData.desc;
+            document.getElementById('footerName').textContent = homeData.name;
+            const social = `<a href="mailto:${homeData.email}"><i class="fas fa-envelope"></i></a><a href="${homeData.linkedin}" target="_blank"><i class="fab fa-linkedin"></i></a><a href="${homeData.github}" target="_blank"><i class="fab fa-github"></i></a>`;
+            document.getElementById('heroSocial').innerHTML = social;
+            document.getElementById('footerSocial').innerHTML = social;
+            document.getElementById('infoCards').innerHTML = `
+                <div class="card"><h3><i class="fas fa-graduation-cap"></i> Education</h3>${homeData.education.map(e => `<div class="card-item">${e.replace(/\n/g, '<br>')}</div>`).join('')}</div>
+                <div class="card"><h3><i class="fas fa-briefcase"></i> Experience</h3>${homeData.experience.map(e => `<div class="card-item">${e.replace(/\n/g, '<br>')}</div>`).join('')}</div>
+                <div class="card"><h3><i class="fas fa-code"></i> Skills</h3>${homeData.skills.map(s => `<div class="card-item">${s}</div>`).join('')}</div>`;
+            document.getElementById('projectsGrid').innerHTML = projects.map(p => `
+                <div class="project-card">
+                    <button class="edit-btn" onclick="editProject(${p.id})">Edit</button>
+                    <button class="delete-btn" onclick="deleteProject(${p.id})">Delete</button>
+                    <div class="project-img"><i class="fas fa-brain"></i></div>
+                    <div class="project-content">
+                        <span class="project-category">${p.category}</span>
+                        <h3 class="project-title">${p.title}</h3>
+                        <p>${p.desc}</p>
+                        <div class="project-skills">${p.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}</div>
+                        <a href="${p.github}" class="btn btn-primary" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('blogsGrid').innerHTML = blogs.map(b => `
+                <div class="blog-card">
+                    <button class="edit-btn" onclick="editBlog(${b.id})">Edit</button>
+                    <button class="delete-btn" onclick="deleteBlog(${b.id})">Delete</button>
+                    <div class="blog-img"><i class="fas fa-blog"></i></div>
+                    <div class="blog-content">
+                        <h3 class="blog-title">${b.title}</h3>
+                        <p>${b.excerpt}</p>
+                        <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 10px;">${b.date}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
 
         function createParticles() {
             const c = document.getElementById('particles');
@@ -466,62 +257,17 @@
                 p.className = 'particle';
                 p.style.left = Math.random() * 100 + '%';
                 p.style.top = Math.random() * 100 + '%';
-                p.dataset.speedX = (Math.random() - 0.5) * 0.5;
-                p.dataset.speedY = (Math.random() - 0.5) * 0.5;
                 c.appendChild(p);
             }
         }
 
-        function animateParticles() {
-            document.querySelectorAll('.particle').forEach(p => {
-                let x = parseFloat(p.style.left), y = parseFloat(p.style.top);
-                let sx = parseFloat(p.dataset.speedX), sy = parseFloat(p.dataset.speedY);
-                x += sx; y += sy;
-                if (x < 0 || x > 100) { sx *= -1; p.dataset.speedX = sx; }
-                if (y < 0 || y > 100) { sy *= -1; p.dataset.speedY = sy; }
-                p.style.left = x + '%'; p.style.top = y + '%';
-            });
-        }
-
-        function addCursorTrail() {
-            let lastTime = 0;
-            document.addEventListener('mousemove', (e) => {
-                const t = Date.now();
-                if (t - lastTime < 50) return;
-                lastTime = t;
-                const trail = document.createElement('div');
-                trail.className = 'cursor-trail';
-                trail.style.left = e.clientX - 10 + 'px';
-                trail.style.top = e.clientY - 10 + 'px';
-                document.body.appendChild(trail);
-                setTimeout(() => trail.remove(), 800);
-            });
-        }
-
-        function addCardMouseTracking() {
-            document.addEventListener('mousemove', (e) => {
-                document.querySelectorAll('.card, .project-card, .blog-card').forEach(c => {
-                    const r = c.getBoundingClientRect();
-                    const x = ((e.clientX - r.left) / r.width) * 100;
-                    const y = ((e.clientY - r.top) / r.height) * 100;
-                    c.style.setProperty('--mouse-x', x + '%');
-                    c.style.setProperty('--mouse-y', y + '%');
-                });
-            });
-        }
-
-        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
-        function closeMenu() { document.getElementById('navLinks').classList.remove('active'); }
-
-        function togglePasswordVisibility() {
-            const inp = document.getElementById('adminPassword'), icon = document.getElementById('passwordToggleIcon');
-            if (inp.type === 'password') { inp.type = 'text'; icon.classList.replace('fa-eye', 'fa-eye-slash'); }
-            else { inp.type = 'password'; icon.classList.replace('fa-eye-slash', 'fa-eye'); }
-        }
-
         function requestEditMode() {
-            if (isEditMode) toggleEditMode();
-            else {
+            if (isEditMode) {
+                isEditMode = false;
+                document.body.classList.remove('edit-mode');
+                document.getElementById('editModeBtn').classList.remove('active');
+                document.getElementById('editModeBtn').innerHTML = '<i class="fas fa-edit"></i> Edit Mode';
+            } else {
                 document.getElementById('passwordModal').classList.add('active');
                 document.getElementById('adminPassword').value = '';
                 document.getElementById('passwordError').style.display = 'none';
@@ -530,444 +276,117 @@
 
         function closePasswordModal() { document.getElementById('passwordModal').classList.remove('active'); }
 
-        function verifyPassword() {
-            hashPassword(document.getElementById('adminPassword').value).then(h => {
-                if (h === ADMIN_PASSWORD_HASH) { closePasswordModal(); toggleEditMode(); }
-                else document.getElementById('passwordError').style.display = 'block';
-            });
-        }
-
-        function toggleEditMode() {
-            isEditMode = !isEditMode;
-            const btn = document.getElementById('editModeBtn');
-            if (isEditMode) {
+        async function verifyPassword() {
+            const h = await hashPassword(document.getElementById('adminPassword').value);
+            if (h === PASS) {
+                closePasswordModal();
+                isEditMode = true;
                 document.body.classList.add('edit-mode');
-                btn.classList.add('active');
-                btn.innerHTML = '<i class="fas fa-times"></i> Exit Edit';
+                document.getElementById('editModeBtn').classList.add('active');
+                document.getElementById('editModeBtn').innerHTML = '<i class="fas fa-times"></i> Exit Edit';
             } else {
-                document.body.classList.remove('edit-mode');
-                btn.classList.remove('active');
-                btn.innerHTML = '<i class="fas fa-edit"></i> Edit Mode';
+                document.getElementById('passwordError').style.display = 'block';
             }
         }
 
-        function renderHome() {
-            document.getElementById('logoText').textContent = homeData.name;
-            document.getElementById('heroName').textContent = homeData.name;
-            document.getElementById('heroTitle').textContent = homeData.title;
-            document.getElementById('heroDesc').textContent = homeData.description;
-            document.getElementById('footerName').textContent = homeData.name;
-            const profileImg = document.getElementById('profileImg');
-            profileImg.innerHTML = homeData.profileImage ? `<img src="${homeData.profileImage}" alt="${homeData.name}">` : '<i class="fas fa-user"></i>';
-            const socialHTML = `<a href="mailto:${homeData.email}"><i class="fas fa-envelope"></i></a><a href="${homeData.linkedin}" target="_blank"><i class="fab fa-linkedin"></i></a><a href="${homeData.github}" target="_blank"><i class="fab fa-github"></i></a>`;
-            document.getElementById('heroSocial').innerHTML = socialHTML;
-            document.getElementById('footerSocial').innerHTML = socialHTML;
-            document.getElementById('infoCards').innerHTML = `
-                <div class="card"><button class="edit-card-btn" onclick="editEducation()"><i class="fas fa-edit"></i> Edit</button><h3><i class="fas fa-graduation-cap"></i> Education</h3>${homeData.education.map(e => `<div class="card-item"><strong>${e.split('\n')[0]}</strong><br>${e.split('\n')[1] || ''}</div>`).join('')}</div>
-                <div class="card"><button class="edit-card-btn" onclick="editExperience()"><i class="fas fa-edit"></i> Edit</button><h3><i class="fas fa-briefcase"></i> Experience</h3>${homeData.experience.map(e => `<div class="card-item"><strong>${e.split('\n')[0]}</strong><br>${e.split('\n')[1] || ''}</div>`).join('')}</div>
-                <div class="card"><button class="edit-card-btn" onclick="editSkills()"><i class="fas fa-edit"></i> Edit</button><h3><i class="fas fa-code"></i> Skills</h3>${homeData.skills.map(s => `<div class="card-item">${s}</div>`).join('')}</div>`;
-        }
-
-        function editHomeSection() {
-            document.getElementById('homeName').value = homeData.name;
-            document.getElementById('homeTitle').value = homeData.title;
-            document.getElementById('homeDescription').value = homeData.description;
-            document.getElementById('homeEmail').value = homeData.email;
-            document.getElementById('homeLinkedin').value = homeData.linkedin;
-            document.getElementById('homeGithub').value = homeData.github;
-            document.getElementById('homeModal').classList.add('active');
-        }
-
-        function closeHomeModal() { document.getElementById('homeModal').classList.remove('active'); }
-
-        function saveHomeSection(e) {
-            e.preventDefault();
-            homeData.name = document.getElementById('homeName').value;
-            homeData.title = document.getElementById('homeTitle').value;
-            homeData.description = document.getElementById('homeDescription').value;
-            homeData.email = document.getElementById('homeEmail').value;
-            homeData.linkedin = document.getElementById('homeLinkedin').value;
-            homeData.github = document.getElementById('homeGithub').value;
-            
-            // Update contact data to sync
-            contactData.email = homeData.email;
-            contactData.linkedin = homeData.linkedin;
-            contactData.github = homeData.github;
-            
-            try {
-                localStorage.setItem('homeData', JSON.stringify(homeData));
-                localStorage.setItem('contactData', JSON.stringify(contactData));
-                renderHome();
-                renderContact();
-                closeHomeModal();
-                alert('Home section updated successfully!');
-            } catch (e) {
-                alert('Error saving: ' + e.message);
-            }
-        }
-
-        function editEducation() {
-            document.getElementById('eduList').value = homeData.education.join('\n\n');
-            document.getElementById('eduModal').classList.add('active');
-        }
-        function closeEduModal() { document.getElementById('eduModal').classList.remove('active'); }
-        function saveEducation(e) {
-            e.preventDefault();
-            homeData.education = document.getElementById('eduList').value.split('\n\n').filter(x => x.trim());
-            localStorage.setItem('homeData', JSON.stringify(homeData));
-            renderHome(); closeEduModal();
-        }
-
-        function editExperience() {
-            document.getElementById('expList').value = homeData.experience.join('\n\n');
-            document.getElementById('expModal').classList.add('active');
-        }
-        function closeExpModal() { document.getElementById('expModal').classList.remove('active'); }
-        function saveExperience(e) {
-            e.preventDefault();
-            homeData.experience = document.getElementById('expList').value.split('\n\n').filter(x => x.trim());
-            localStorage.setItem('homeData', JSON.stringify(homeData));
-            renderHome(); closeExpModal();
-        }
-
-        function editSkills() {
-            document.getElementById('skillList').value = homeData.skills.join('\n');
-            document.getElementById('skillModal').classList.add('active');
-        }
-        function closeSkillModal() { document.getElementById('skillModal').classList.remove('active'); }
-        function saveSkills(e) {
-            e.preventDefault();
-            homeData.skills = document.getElementById('skillList').value.split('\n').filter(x => x.trim());
-            localStorage.setItem('homeData', JSON.stringify(homeData));
-            renderHome(); closeSkillModal();
-        }
-
-        function editProfileImage() {
-            document.getElementById('profileImagePreview').style.display = 'none';
-            document.getElementById('profileImageFile').value = '';
-            currentProfileImage = homeData.profileImage;
-            if (currentProfileImage) {
-                document.getElementById('profileImagePreview').src = currentProfileImage;
-                document.getElementById('profileImagePreview').style.display = 'block';
-            }
-            checkStorage('profile');
-            document.getElementById('profileImageModal').classList.add('active');
-        }
-        function closeProfileImageModal() { document.getElementById('profileImageModal').classList.remove('active'); }
-
-        function previewProfileImage(e) {
-            const f = e.target.files[0];
-            if (!f) return;
-            if (f.size > 8000000) { alert('Image too large! Max 8MB.'); e.target.value = ''; return; }
-            const r = new FileReader();
-            r.onload = function(ev) {
-                compressImage(ev.target.result, 600, 0.7, (c) => {
-                    currentProfileImage = c;
-                    document.getElementById('profileImagePreview').src = c;
-                    document.getElementById('profileImagePreview').style.display = 'block';
-                });
-            };
-            r.readAsDataURL(f);
-        }
-
-        function saveProfileImage() {
-            if (currentProfileImage) {
-                homeData.profileImage = currentProfileImage;
-                try {
-                    localStorage.setItem('homeData', JSON.stringify(homeData));
-                    renderHome();
-                    closeProfileImageModal();
-                    alert('Profile image updated successfully!');
-                } catch (e) {
-                    if (e.name === 'QuotaExceededError') {
-                        alert('Storage full! Use a smaller image (compress it first).');
-                    } else {
-                        alert('Error saving image: ' + e.message);
-                    }
-                }
-            } else {
-                closeProfileImageModal();
-            }
-        }
-
-        function renderContact() {
-            document.getElementById('contactDesc').textContent = contactData.description;
-            const socialHTML = `<a href="mailto:${homeData.email}"><i class="fas fa-envelope"></i></a><a href="${homeData.linkedin}" target="_blank"><i class="fab fa-linkedin"></i></a><a href="${homeData.github}" target="_blank"><i class="fab fa-github"></i></a>`;
-            document.getElementById('contactSocial').innerHTML = socialHTML;
-        }
-
-        function editContactSection() {
-            document.getElementById('contactDescription').value = contactData.description;
-            document.getElementById('contactEmail').value = homeData.email;
-            document.getElementById('contactLinkedin').value = homeData.linkedin;
-            document.getElementById('contactGithub').value = homeData.github;
-            document.getElementById('contactModal').classList.add('active');
-        }
-        function closeContactModal() { document.getElementById('contactModal').classList.remove('active'); }
-
-        function saveContactSection(e) {
-            e.preventDefault();
-            const email = document.getElementById('contactEmail').value;
-            const linkedin = document.getElementById('contactLinkedin').value;
-            const github = document.getElementById('contactGithub').value;
-            const description = document.getElementById('contactDescription').value;
-            
-            contactData = {description, email, linkedin, github};
-            homeData.email = email;
-            homeData.linkedin = linkedin;
-            homeData.github = github;
-            
-            try {
-                localStorage.setItem('contactData', JSON.stringify(contactData));
-                localStorage.setItem('homeData', JSON.stringify(homeData));
-                renderContact();
-                renderHome();
-                closeContactModal();
-                alert('Contact section updated successfully!');
-            } catch (err) {
-                alert('Error saving: ' + err.message);
-            }
-        }
-
-        function compressImage(base64, maxSize, quality, callback) {
-            const img = new Image();
-            img.onload = function() {
-                const canvas = document.createElement('canvas');
-                let w = img.width, h = img.height;
-                if (w > maxSize || h > maxSize) {
-                    if (w > h) { h = (h / w) * maxSize; w = maxSize; }
-                    else { w = (w / h) * maxSize; h = maxSize; }
-                }
-                canvas.width = w; canvas.height = h;
-                const ctx = canvas.getContext('2d');
-                ctx.imageSmoothingEnabled = true;
-                ctx.imageSmoothingQuality = 'high';
-                ctx.drawImage(img, 0, 0, w, h);
-                callback(canvas.toDataURL('image/jpeg', quality));
-            };
-            img.src = base64;
-        }
-
-        function previewImage(e, type) {
-            const f = e.target.files[0];
-            if (!f) return;
-            if (f.size > 8000000) { alert('Image too large! Max 8MB.'); e.target.value = ''; return; }
-            const r = new FileReader();
-            r.onload = function(ev) {
-                compressImage(ev.target.result, 1000, 0.65, (c) => {
-                    const preview = document.getElementById(`${type}ImagePreview`);
-                    preview.src = c;
-                    preview.style.display = 'block';
-                    if (type === 'project') currentProjectImage = c;
-                    else if (type === 'blog') currentBlogImage = c;
-                });
-            };
-            r.readAsDataURL(f);
-        }
-
-        function checkStorage(type) {
-            try {
-                const test = JSON.stringify(localStorage);
-                const used = new Blob([test]).size;
-                const limit = 5 * 1024 * 1024;
-                if (used > limit * 0.8) {
-                    document.getElementById(`${type}StorageWarning`).style.display = 'block';
-                }
-            } catch(e) {}
-        }
-
-        function renderProjects() {
-            const grid = document.getElementById('projectsGrid');
-            grid.innerHTML = projects.map((p, i) => `
-                <div class="project-card" style="--i: ${i+1}">
-                    <button class="edit-btn" onclick="editProject(${p.id})">Edit</button>
-                    <button class="delete-btn" onclick="deleteProject(${p.id})">Delete</button>
-                    <div class="project-img">${p.image ? `<img src="${p.image}" alt="${p.title}">` : `<i class="fas ${p.icon}"></i>`}</div>
-                    <div class="project-content">
-                        <span class="project-category">${p.category}</span>
-                        <h3 class="project-title">${p.title}</h3>
-                        <p class="project-desc">${p.desc}</p>
-                        <div class="project-skills">${p.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}</div>
-                        <div class="project-links"><a href="${p.github}" class="btn btn-primary" target="_blank"><i class="fab fa-github"></i> GitHub</a></div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function openProjectModal(project = null) {
-            editingProjectId = project ? project.id : null;
-            currentProjectImage = project ? project.image : null;
-            document.getElementById('projectModalTitle').textContent = project ? 'Edit Project' : 'Add New Project';
-            checkStorage('project');
-            if (project) {
-                document.getElementById('projectTitle').value = project.title;
-                document.getElementById('projectCategory').value = project.category;
-                document.getElementById('projectDesc').value = project.desc;
-                document.getElementById('projectSkills').value = project.skills.join(', ');
-                document.getElementById('projectGithub').value = project.github;
-                document.getElementById('projectIcon').value = project.icon;
-                if (project.image) {
-                    document.getElementById('projectImagePreview').src = project.image;
-                    document.getElementById('projectImagePreview').style.display = 'block';
-                } else document.getElementById('projectImagePreview').style.display = 'none';
+        function openProjectModal(p = null) {
+            editingProjectId = p ? p.id : null;
+            document.getElementById('projectModalTitle').textContent = p ? 'Edit Project' : 'Add Project';
+            if (p) {
+                document.getElementById('projectTitle').value = p.title;
+                document.getElementById('projectCategory').value = p.category;
+                document.getElementById('projectDesc').value = p.desc;
+                document.getElementById('projectSkills').value = p.skills.join(', ');
+                document.getElementById('projectGithub').value = p.github;
             } else {
                 document.getElementById('projectForm').reset();
-                document.getElementById('projectIcon').value = 'fa-code';
-                document.getElementById('projectImagePreview').style.display = 'none';
             }
             document.getElementById('projectModal').classList.add('active');
         }
 
-        function closeProjectModal() {
-            document.getElementById('projectModal').classList.remove('active');
-            editingProjectId = null; currentProjectImage = null;
-        }
+        function closeProjectModal() { document.getElementById('projectModal').classList.remove('active'); }
 
-        function saveProject(e) {
+        async function saveProject(e) {
             e.preventDefault();
-            const projectData = {
+            const data = {
                 id: editingProjectId || Date.now(),
                 title: document.getElementById('projectTitle').value,
                 category: document.getElementById('projectCategory').value,
                 desc: document.getElementById('projectDesc').value,
-                skills: document.getElementById('projectSkills').value.split(',').map(s => s.trim()).filter(s => s),
-                github: document.getElementById('projectGithub').value,
-                icon: document.getElementById('projectIcon').value,
-                image: currentProjectImage
+                skills: document.getElementById('projectSkills').value.split(',').map(s => s.trim()),
+                github: document.getElementById('projectGithub').value
             };
             if (editingProjectId) {
-                const idx = projects.findIndex(p => p.id === editingProjectId);
-                projects[idx] = projectData;
-            } else projects.push(projectData);
-            try {
-                localStorage.setItem('projects', JSON.stringify(projects));
-                renderProjects(); closeProjectModal();
-            } catch (e) {
-                if (e.name === 'QuotaExceededError') {
-                    alert('Storage full! Delete old projects or use smaller images.');
-                    if (!editingProjectId) projects.pop();
-                } else alert('Error: ' + e.message);
+                projects = projects.map(p => p.id === editingProjectId ? data : p);
+            } else {
+                projects.push(data);
             }
+            await saveData('pf_projects', projects);
+            render();
+            closeProjectModal();
+            alert('Project saved!');
         }
 
         function editProject(id) { openProjectModal(projects.find(p => p.id === id)); }
 
-        function deleteProject(id) {
-            if (confirm('Delete this project?')) {
+        async function deleteProject(id) {
+            if (confirm('Delete?')) {
                 projects = projects.filter(p => p.id !== id);
-                localStorage.setItem('projects', JSON.stringify(projects));
-                renderProjects();
+                await saveData('pf_projects', projects);
+                render();
             }
         }
 
-        function renderBlogs() {
-            const grid = document.getElementById('blogsGrid');
-            grid.innerHTML = blogs.map((b, i) => `
-                <div class="blog-card" style="--i: ${i+1}" onclick="viewBlogDetail(${b.id})">
-                    <button class="edit-btn" onclick="event.stopPropagation(); editBlog(${b.id})">Edit</button>
-                    <button class="delete-btn" onclick="event.stopPropagation(); deleteBlog(${b.id})">Delete</button>
-                    <div class="blog-img">${b.image ? `<img src="${b.image}" alt="${b.title}">` : `<i class="fas ${b.icon}"></i>`}</div>
-                    <div class="blog-content">
-                        <div class="blog-meta"><span>Author: ${homeData.name}</span><span>${b.date}</span></div>
-                        <h3 class="blog-title">${b.title}</h3>
-                        <p class="blog-excerpt">${b.excerpt}</p>
-                        <div class="blog-actions"><button class="btn btn-primary">Read More <i class="fas fa-arrow-right"></i></button></div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function viewBlogDetail(id) {
-            const blog = blogs.find(b => b.id === id);
-            if (!blog) return;
-            document.getElementById('blogDetailContent').innerHTML = `
-                <h1>${blog.title}</h1>
-                <div style="display: flex; gap: 20px; margin-bottom: 20px; opacity: 0.7; font-size: 0.9rem;">
-                    <span><i class="fas fa-user"></i> ${homeData.name}</span>
-                    <span><i class="fas fa-calendar"></i> ${blog.date}</span>
-                </div>
-                ${blog.image ? `<img src="${blog.image}" alt="${blog.title}" style="width: 100%; border-radius: 15px; margin: 20px 0;">` : ''}
-                <div>${blog.content.split('\n\n').map(p => `<p>${p}</p>`).join('')}</div>`;
-            document.getElementById('blogDetailModal').classList.add('active');
-        }
-
-        function closeBlogDetail() { document.getElementById('blogDetailModal').classList.remove('active'); }
-
-        function openBlogModal(blog = null) {
-            editingBlogId = blog ? blog.id : null;
-            currentBlogImage = blog ? blog.image : null;
-            document.getElementById('blogModalTitle').textContent = blog ? 'Edit Blog' : 'Add New Blog';
-            checkStorage('blog');
-            if (blog) {
-                document.getElementById('blogTitle').value = blog.title;
-                document.getElementById('blogExcerpt').value = blog.excerpt;
-                document.getElementById('blogContent').value = blog.content;
-                document.getElementById('blogDate').value = blog.date;
-                document.getElementById('blogIcon').value = blog.icon;
-                if (blog.image) {
-                    document.getElementById('blogImagePreview').src = blog.image;
-                    document.getElementById('blogImagePreview').style.display = 'block';
-                } else document.getElementById('blogImagePreview').style.display = 'none';
+        function openBlogModal(b = null) {
+            editingBlogId = b ? b.id : null;
+            document.getElementById('blogModalTitle').textContent = b ? 'Edit Blog' : 'Add Blog';
+            if (b) {
+                document.getElementById('blogTitle').value = b.title;
+                document.getElementById('blogExcerpt').value = b.excerpt;
+                document.getElementById('blogContent').value = b.content;
+                document.getElementById('blogDate').value = b.date;
             } else {
                 document.getElementById('blogForm').reset();
-                document.getElementById('blogIcon').value = 'fa-blog';
-                document.getElementById('blogImagePreview').style.display = 'none';
             }
             document.getElementById('blogModal').classList.add('active');
         }
 
-        function closeBlogModal() {
-            document.getElementById('blogModal').classList.remove('active');
-            editingBlogId = null; currentBlogImage = null;
-        }
+        function closeBlogModal() { document.getElementById('blogModal').classList.remove('active'); }
 
-        function saveBlog(e) {
+        async function saveBlog(e) {
             e.preventDefault();
-            const blogData = {
+            const data = {
                 id: editingBlogId || Date.now(),
                 title: document.getElementById('blogTitle').value,
                 excerpt: document.getElementById('blogExcerpt').value,
                 content: document.getElementById('blogContent').value,
-                date: document.getElementById('blogDate').value,
-                icon: document.getElementById('blogIcon').value,
-                image: currentBlogImage
+                date: document.getElementById('blogDate').value
             };
             if (editingBlogId) {
-                const idx = blogs.findIndex(b => b.id === editingBlogId);
-                blogs[idx] = blogData;
-            } else blogs.push(blogData);
-            try {
-                localStorage.setItem('blogs', JSON.stringify(blogs));
-                renderBlogs(); closeBlogModal();
-            } catch (e) {
-                if (e.name === 'QuotaExceededError') {
-                    alert('Storage full! Delete old blogs or use smaller images.');
-                    if (!editingBlogId) blogs.pop();
-                } else alert('Error: ' + e.message);
+                blogs = blogs.map(b => b.id === editingBlogId ? data : b);
+            } else {
+                blogs.push(data);
             }
+            await saveData('pf_blogs', blogs);
+            render();
+            closeBlogModal();
+            alert('Blog saved!');
         }
 
         function editBlog(id) { openBlogModal(blogs.find(b => b.id === id)); }
 
-        function deleteBlog(id) {
-            if (confirm('Delete this blog?')) {
+        async function deleteBlog(id) {
+            if (confirm('Delete?')) {
                 blogs = blogs.filter(b => b.id !== id);
-                localStorage.setItem('blogs', JSON.stringify(blogs));
-                renderBlogs();
+                await saveData('pf_blogs', blogs);
+                render();
             }
         }
 
-        window.onclick = function(e) {
-            if (e.target.classList.contains('modal')) e.target.classList.remove('active');
-        }
+        window.onclick = function(e) { if (e.target.classList.contains('modal')) e.target.classList.remove('active'); }
 
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', function (e) {
-                e.preventDefault();
-                const t = document.querySelector(this.getAttribute('href'));
-                if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
+        createParticles();
+        loadData();
     </script>
 </body>
 </html>
