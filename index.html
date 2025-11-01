@@ -9,58 +9,242 @@
   <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
 </head>
 <body>
+  <!-- Background Effects -->
+  <div class="background-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Header Section -->
   <header>
+    <div class="profile-container">
+      <input type="file" id="profile-upload" accept="image/*" style="display:none;">
+      <img id="profile-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Crect fill='%23a78bfa' width='220' height='220'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='80' fill='white'%3EMY%3C/text%3E%3C/svg%3E" alt="Profile Picture" onclick="document.getElementById('profile-upload').click()">
+      <div class="upload-overlay" onclick="document.getElementById('profile-upload').click()">
+        <span>📸 Change Photo</span>
+      </div>
+    </div>
     <h1 contenteditable="true" id="home-title">Hi, I'm Mamata Yadav 👋</h1>
     <p contenteditable="true" id="home-subtitle">Data Scientist & AI Developer</p>
-    <input type="file" id="profile-upload" accept="image/*" style="display:none;">
-    <img id="profile-img" src="placeholder.jpg" alt="Profile Picture" onclick="document.getElementById('profile-upload').click()">
   </header>
 
   <main>
-    <section id="education">
-      <h2>Education 🎓</h2>
-      <div contenteditable="true" class="editable" id="edu-text">
-        B.Sc & B.Ed (PCM) - RIE Bhubaneswar, 2019–23, Chemistry Honors
+    <!-- Education Section -->
+    <section id="education" data-scroll-reveal>
+      <div class="section-header">
+        <h2>Education 🎓</h2>
+      </div>
+      <div class="education-item" contenteditable="true" id="edu-text">
+        <div class="edu-degree">B.Sc & B.Ed (PCM)</div>
+        <div class="edu-school">RIE Bhubaneswar</div>
+        <div class="edu-year">2019–23</div>
+        <div class="edu-major">Chemistry Honors</div>
       </div>
     </section>
 
-    <section id="experience">
-      <h2>Experience 💼</h2>
-      <div contenteditable="true" class="editable" id="exp-text">
-        Working on AI/ML projects focusing on Deep Learning and NLP.
+    <!-- Experience Section -->
+    <section id="experience" data-scroll-reveal>
+      <div class="section-header">
+        <h2>Experience 💼</h2>
+      </div>
+      <div class="experience-item" contenteditable="true" id="exp-text">
+        <div class="exp-title">AI/ML Developer</div>
+        <div class="exp-description">Working on AI/ML projects focusing on Deep Learning and NLP.</div>
       </div>
     </section>
 
-    <section id="skills">
-      <h2>Skills ⚙️</h2>
-      <ul id="skills-list" contenteditable="true">
-        <li>Python</li>
-        <li>TensorFlow</li>
-        <li>Power BI</li>
-      </ul>
-    </section>
-
-    <section id="projects">
-      <h2>Projects 🚀</h2>
-      <div id="projects-container" contenteditable="true">
-        <p>Movie Recommendation Engine | CNN-based Color Model | GDP Forecast Analysis</p>
+    <!-- Skills Section -->
+    <section id="skills" data-scroll-reveal>
+      <div class="section-header">
+        <h2>Skills ⚙️</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-item">→ Python</div>
+        <div class="skill-item">→ TensorFlow</div>
+        <div class="skill-item">→ Power BI</div>
+        <div class="skill-item">→ Deep Learning</div>
+        <div class="skill-item">→ NLP</div>
+        <div class="skill-item">→ Machine Learning</div>
       </div>
     </section>
 
-    <section id="blogs">
-      <h2>Blogs ✍️</h2>
-      <div id="blogs-container" contenteditable="true">
-        <p>LoRA Fine-tuning | LLM Preprocessing | Gaussian Mixture Models Explained</p>
+    <!-- Projects Section -->
+    <section id="projects" data-scroll-reveal>
+      <div class="section-header">
+        <h2>Projects 🚀</h2>
+        <button class="add-btn" onclick="addProject()">+ Add Project</button>
+      </div>
+      <div id="projects-container" class="projects-grid">
+        <!-- Projects will be added here dynamically -->
+        <div class="project-card">
+          <div class="project-image">🎬</div>
+          <div class="project-content">
+            <div class="project-category">Machine Learning</div>
+            <h3 contenteditable="true">Movie Recommendation Engine</h3>
+            <p contenteditable="true">Built a collaborative filtering system for personalized movie recommendations.</p>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">scikit-learn</span>
+              <span class="project-tag">Pandas</span>
+            </div>
+          </div>
+          <button class="delete-btn" onclick="deleteProject(this)">🗑️</button>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image">🎨</div>
+          <div class="project-content">
+            <div class="project-category">Deep Learning</div>
+            <h3 contenteditable="true">CNN-based Color Model</h3>
+            <p contenteditable="true">Developed a convolutional neural network for color classification tasks.</p>
+            <div class="project-tags">
+              <span class="project-tag">TensorFlow</span>
+              <span class="project-tag">Keras</span>
+              <span class="project-tag">OpenCV</span>
+            </div>
+          </div>
+          <button class="delete-btn" onclick="deleteProject(this)">🗑️</button>
+        </div>
+
+        <div class="project-card">
+          <div class="project-image">📊</div>
+          <div class="project-content">
+            <div class="project-category">Data Analysis</div>
+            <h3 contenteditable="true">GDP Forecast Analysis</h3>
+            <p contenteditable="true">Time series analysis and forecasting of GDP trends using statistical models.</p>
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag">ARIMA</span>
+              <span class="project-tag">Power BI</span>
+            </div>
+          </div>
+          <button class="delete-btn" onclick="deleteProject(this)">🗑️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blogs Section -->
+    <section id="blogs" data-scroll-reveal>
+      <div class="section-header">
+        <h2>Blogs ✍️</h2>
+        <button class="add-btn" onclick="addBlog()">+ Add Blog</button>
+      </div>
+      <div id="blogs-container" class="blogs-grid">
+        <!-- Blogs will be added here dynamically -->
+        <div class="blog-card">
+          <div class="blog-image">📚</div>
+          <div class="blog-content">
+            <div class="blog-date">📅 Jan 2024</div>
+            <h3 contenteditable="true">LoRA Fine-tuning Explained</h3>
+            <p contenteditable="true">A comprehensive guide to Low-Rank Adaptation for efficient model fine-tuning.</p>
+            <div class="blog-tags">
+              <span class="blog-tag">LLM</span>
+              <span class="blog-tag">Fine-tuning</span>
+              <span class="blog-tag">LoRA</span>
+            </div>
+          </div>
+          <button class="delete-btn" onclick="deleteBlog(this)">🗑️</button>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-image">🔤</div>
+          <div class="blog-content">
+            <div class="blog-date">📅 Dec 2023</div>
+            <h3 contenteditable="true">LLM Preprocessing Techniques</h3>
+            <p contenteditable="true">Best practices for preparing data for large language model training.</p>
+            <div class="blog-tags">
+              <span class="blog-tag">NLP</span>
+              <span class="blog-tag">LLM</span>
+              <span class="blog-tag">Data</span>
+            </div>
+          </div>
+          <button class="delete-btn" onclick="deleteBlog(this)">🗑️</button>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-image">📈</div>
+          <div class="blog-content">
+            <div class="blog-date">📅 Nov 2023</div>
+            <h3 contenteditable="true">Gaussian Mixture Models</h3>
+            <p contenteditable="true">Understanding GMM for clustering and probability density estimation.</p>
+            <div class="blog-tags">
+              <span class="blog-tag">ML</span>
+              <span class="blog-tag">Statistics</span>
+              <span class="blog-tag">Clustering</span>
+            </div>
+          </div>
+          <button class="delete-btn" onclick="deleteBlog(this)">🗑️</button>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <button id="save-btn">💾 Save Changes</button>
-    <button id="publish-btn">🚀 Publish to GitHub</button>
+    <button id="save-btn" class="btn-primary">💾 Save Changes</button>
+    <button id="publish-btn" class="btn-success">🚀 Publish to GitHub</button>
   </footer>
 
   <script src="script.js"></script>
   <script src="effects.js"></script>
+  <script>
+    // Add Project Function
+    function addProject() {
+      const container = document.getElementById('projects-container');
+      const newProject = document.createElement('div');
+      newProject.className = 'project-card';
+      newProject.innerHTML = `
+        <div class="project-image">💡</div>
+        <div class="project-content">
+          <div class="project-category" contenteditable="true">Category</div>
+          <h3 contenteditable="true">New Project Title</h3>
+          <p contenteditable="true">Project description goes here...</p>
+          <div class="project-tags">
+            <span class="project-tag" contenteditable="true">Tag1</span>
+            <span class="project-tag" contenteditable="true">Tag2</span>
+          </div>
+        </div>
+        <button class="delete-btn" onclick="deleteProject(this)">🗑️</button>
+      `;
+      container.appendChild(newProject);
+      newProject.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // Delete Project Function
+    function deleteProject(btn) {
+      if (confirm('Delete this project?')) {
+        btn.parentElement.remove();
+      }
+    }
+
+    // Add Blog Function
+    function addBlog() {
+      const container = document.getElementById('blogs-container');
+      const newBlog = document.createElement('div');
+      newBlog.className = 'blog-card';
+      newBlog.innerHTML = `
+        <div class="blog-image">✨</div>
+        <div class="blog-content">
+          <div class="blog-date" contenteditable="true">📅 Date</div>
+          <h3 contenteditable="true">New Blog Title</h3>
+          <p contenteditable="true">Blog description goes here...</p>
+          <div class="blog-tags">
+            <span class="blog-tag" contenteditable="true">Tag1</span>
+            <span class="blog-tag" contenteditable="true">Tag2</span>
+          </div>
+        </div>
+        <button class="delete-btn" onclick="deleteBlog(this)">🗑️</button>
+      `;
+      container.appendChild(newBlog);
+      newBlog.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // Delete Blog Function
+    function deleteBlog(btn) {
+      if (confirm('Delete this blog?')) {
+        btn.parentElement.remove();
+      }
+    }
+  </script>
 </body>
 </html>
