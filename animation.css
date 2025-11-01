@@ -193,31 +193,119 @@ body.edit-mode [contenteditable="true"]:focus::after {
   animation: float-gentle 3s ease-in-out infinite;
 }
 
-/* ===== Skill Tag Pop-in Animation ===== */
-@keyframes pop-in {
+/* ===== Magic Sparkle Trail Effect ===== */
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  font-size: 1.2rem;
+  z-index: 9999;
+  animation: sparkle-trail 1s ease-out forwards;
+}
+
+@keyframes sparkle-trail {
   0% {
     opacity: 0;
-    transform: scale(0.5) rotate(-10deg);
+    transform: translate(0, 0) scale(0.5) rotate(0deg);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--drift-x, 0), var(--drift-y, -50px)) scale(1.5) rotate(360deg);
+  }
+}
+
+/* Enhanced Section Hover Glow */
+section:hover {
+  animation: section-glow 2s ease-in-out infinite;
+}
+
+@keyframes section-glow {
+  0%, 100% {
+    box-shadow: 0 15px 50px rgba(167, 139, 250, 0.3);
+  }
+  50% {
+    box-shadow: 0 15px 60px rgba(167, 139, 250, 0.5),
+                0 0 30px rgba(167, 139, 250, 0.3);
+  }
+}
+
+/* Gradient Text Shine Effect */
+@keyframes text-shine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.edu-degree,
+.exp-title {
+  background-size: 200% auto;
+  animation: text-shine 3s linear infinite;
+}
+
+/* Education Card Entrance Animation */
+.education-item {
+  animation: slide-in-right 0.8s ease-out;
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Experience Card Entrance Animation */
+.experience-item {
+  animation: slide-in-left 0.8s ease-out;
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Skills Pop-in Animation */
+.skill-item {
+  animation: skill-pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+}
+
+.skill-item:nth-child(1) { animation-delay: 0.1s; }
+.skill-item:nth-child(2) { animation-delay: 0.15s; }
+.skill-item:nth-child(3) { animation-delay: 0.2s; }
+.skill-item:nth-child(4) { animation-delay: 0.25s; }
+.skill-item:nth-child(5) { animation-delay: 0.3s; }
+.skill-item:nth-child(6) { animation-delay: 0.35s; }
+.skill-item:nth-child(7) { animation-delay: 0.4s; }
+.skill-item:nth-child(8) { animation-delay: 0.45s; }
+
+@keyframes skill-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotateZ(-15deg);
   }
   70% {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.1) rotateZ(5deg);
   }
   100% {
     opacity: 1;
-    transform: scale(1) rotate(0deg);
+    transform: scale(1) rotateZ(0);
   }
 }
-
-#skills-list li {
-  animation: pop-in 0.5s ease-out backwards;
-}
-
-#skills-list li:nth-child(1) { animation-delay: 0.1s; }
-#skills-list li:nth-child(2) { animation-delay: 0.2s; }
-#skills-list li:nth-child(3) { animation-delay: 0.3s; }
-#skills-list li:nth-child(4) { animation-delay: 0.4s; }
-#skills-list li:nth-child(5) { animation-delay: 0.5s; }
-#skills-list li:nth-child(6) { animation-delay: 0.6s; }
 
 /* ===== Border Glow Animation ===== */
 @keyframes border-glow {
