@@ -1,15 +1,42 @@
 /* ============================================
-   ANIMATION.CSS - Visual Enhancements
+   ENHANCED ANIMATION.CSS - Advanced Effects
    ============================================ */
 
-/* ===== Keyframes ===== */
-
-@keyframes float-orb {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(20px, -30px) scale(1.05); }
-  50% { transform: translate(-15px, 20px) scale(0.95); }
-  75% { transform: translate(30px, 10px) scale(1.02); }
+/* ===== Particle Canvas Styling ===== */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.6;
 }
+
+/* ===== Scroll Reveal Animations ===== */
+[data-scroll-reveal] {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-scroll-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children animations */
+[data-scroll-reveal].revealed > * {
+  animation: fade-slide-up 0.6s ease-out forwards;
+}
+
+[data-scroll-reveal].revealed > *:nth-child(1) { animation-delay: 0.1s; }
+[data-scroll-reveal].revealed > *:nth-child(2) { animation-delay: 0.2s; }
+[data-scroll-reveal].revealed > *:nth-child(3) { animation-delay: 0.3s; }
+[data-scroll-reveal].revealed > *:nth-child(4) { animation-delay: 0.4s; }
+[data-scroll-reveal].revealed > *:nth-child(5) { animation-delay: 0.5s; }
 
 @keyframes fade-slide-up {
   from {
@@ -22,121 +49,50 @@
   }
 }
 
-@keyframes glow-pulse {
-  0%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-  50% { box-shadow: 0 6px 30px rgba(108, 99, 255, 0.3); }
+/* ===== 3D Card Tilt Effect ===== */
+.tilt-card {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-style: preserve-3d;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
 }
 
-/* ===== Background Orbs ===== */
+.tilt-card:hover {
+  transform: perspective(1000px) 
+             rotateX(var(--tilt-x)) 
+             rotateY(var(--tilt-y)) 
+             scale(1.02);
+  box-shadow: 0 20px 60px rgba(167, 139, 250, 0.4);
+}
 
-.background-orbs {
-  position: fixed;
+.tilt-card::after {
+  content: '';
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  overflow: hidden;
-}
-
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.4;
-  will-change: transform;
-  animation: float-orb 20s ease-in-out infinite;
-}
-
-.orb-1 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(195,174,214,0.8), rgba(162,194,225,0.4));
-  top: 10%;
-  left: 10%;
-  animation-duration: 25s;
-  animation-delay: 0s;
-}
-
-.orb-2 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(162,194,225,0.7), rgba(195,174,214,0.3));
-  top: 50%;
-  right: 10%;
-  animation-duration: 30s;
-  animation-delay: -5s;
-}
-
-.orb-3 {
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle, rgba(108,99,255,0.3), rgba(195,174,214,0.2));
-  bottom: 15%;
-  left: 20%;
-  animation-duration: 28s;
-  animation-delay: -10s;
-}
-
-/* Disable orbs on mobile */
-@media (max-width: 768px) {
-  .orb {
-    display: none;
-  }
-}
-
-/* ===== Scroll Reveal ===== */
-
-[data-scroll-reveal] {
+  background: linear-gradient(135deg, 
+                              rgba(167, 139, 250, 0.1), 
+                              rgba(192, 132, 252, 0.1));
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-radius: inherit;
 }
 
-[data-scroll-reveal].revealed {
+.tilt-card:hover::after {
   opacity: 1;
-  transform: translateY(0);
 }
 
-/* Disable scroll reveal if reduced motion preferred */
-@media (prefers-reduced-motion: reduce) {
-  [data-scroll-reveal] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-}
-
-/* ===== Card 3D Tilt ===== */
-
-.tilt-card {
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  transform-style: preserve-3d;
-}
-
-.tilt-card:hover {
-  transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(1.02);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tilt-card:hover {
-    transform: scale(1.02);
-  }
-}
-
-/* ===== Button Hover Glow ===== */
-
+/* ===== Button Ripple Effect ===== */
 button {
   position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
 }
 
-button::before {
+button::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -144,52 +100,309 @@ button::before {
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.5);
   transform: translate(-50%, -50%);
-  transition: width 0.5s, height 0.5s;
+  transition: width 0.6s ease, height 0.6s ease;
 }
 
-button:hover::before {
+button:active::after {
   width: 300px;
   height: 300px;
+  transition: width 0s, height 0s;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  button::before {
-    display: none;
+/* ===== Gradient Animation on Headings ===== */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
-/* ===== Focus States (Accessibility) ===== */
-
-*:focus-visible {
-  outline: 3px solid #6c63ff;
-  outline-offset: 2px;
+h1, h2 {
+  background-size: 200% auto;
+  animation: gradient-shift 3s ease infinite;
 }
 
-/* ===== Particle Canvas ===== */
+/* ===== Glow Pulse on Hover ===== */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 15px 50px rgba(167, 139, 250, 0.5);
+  }
+}
 
-#particle-canvas {
-  position: fixed;
+section:hover,
+.project-card:hover {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* ===== Image Upload Overlay ===== */
+#profile-upload-overlay {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.5;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  #particle-canvas {
-    display: none;
+#profile-img:hover + #profile-upload-overlay,
+#profile-upload-overlay:hover {
+  opacity: 1;
+}
+
+/* ===== Typing Cursor Effect (Edit Mode) ===== */
+body.edit-mode [contenteditable="true"]:focus::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background: var(--accent);
+  margin-left: 4px;
+  animation: blink-cursor 1s step-end infinite;
+}
+
+@keyframes blink-cursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ===== Floating Animation for Elements ===== */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+  animation: float-gentle 3s ease-in-out infinite;
+}
+
+/* ===== Skill Tag Pop-in Animation ===== */
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-10deg);
+  }
+  70% {
+    transform: scale(1.1) rotate(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
   }
 }
 
-/* ===== Edit Mode Overrides ===== */
+#skills-list li {
+  animation: pop-in 0.5s ease-out backwards;
+}
 
-body.edit-mode .orb,
-body.edit-mode #particle-canvas {
-  animation-play-state: paused;
-  opacity: 0.1;
+#skills-list li:nth-child(1) { animation-delay: 0.1s; }
+#skills-list li:nth-child(2) { animation-delay: 0.2s; }
+#skills-list li:nth-child(3) { animation-delay: 0.3s; }
+#skills-list li:nth-child(4) { animation-delay: 0.4s; }
+#skills-list li:nth-child(5) { animation-delay: 0.5s; }
+#skills-list li:nth-child(6) { animation-delay: 0.6s; }
+
+/* ===== Border Glow Animation ===== */
+@keyframes border-glow {
+  0%, 100% {
+    border-color: rgba(167, 139, 250, 0.2);
+  }
+  50% {
+    border-color: rgba(167, 139, 250, 0.8);
+  }
+}
+
+section:hover,
+.project-card:hover {
+  animation: border-glow 2s ease-in-out infinite;
+}
+
+/* ===== Loading Shimmer Effect ===== */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.loading-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(30, 41, 59, 0.4) 0%,
+    rgba(167, 139, 250, 0.3) 50%,
+    rgba(30, 41, 59, 0.4) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ===== Particle Twinkle Variations ===== */
+.particle {
+  animation-duration: calc(2s + var(--delay, 0s));
+  animation-delay: var(--delay, 0s);
+}
+
+/* ===== Badge Bounce on Hover ===== */
+.project-category,
+.project-tag {
+  transition: transform 0.3s ease;
+}
+
+.project-category:hover,
+.project-tag:hover {
+  transform: translateY(-5px) scale(1.1);
+}
+
+/* ===== Text Gradient Reveal ===== */
+@keyframes gradient-reveal {
+  from {
+    background-position: 200% center;
+  }
+  to {
+    background-position: -200% center;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    var(--accent) 25%,
+    var(--secondary) 50%,
+    var(--accent) 75%,
+    var(--primary) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-reveal 3s linear infinite;
+}
+
+/* ===== Stagger Grid Items ===== */
+.grid-stagger > *:nth-child(1) { animation-delay: 0.1s; }
+.grid-stagger > *:nth-child(2) { animation-delay: 0.2s; }
+.grid-stagger > *:nth-child(3) { animation-delay: 0.3s; }
+.grid-stagger > *:nth-child(4) { animation-delay: 0.4s; }
+.grid-stagger > *:nth-child(5) { animation-delay: 0.5s; }
+.grid-stagger > *:nth-child(6) { animation-delay: 0.6s; }
+
+/* ===== Shadow Expand on Hover ===== */
+@keyframes shadow-expand {
+  from {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  to {
+    box-shadow: 0 20px 80px rgba(167, 139, 250, 0.6);
+  }
+}
+
+/* ===== Reduced Motion Preferences ===== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .orb,
+  #particle-canvas,
+  [data-scroll-reveal] {
+    animation: none !important;
+    opacity: 0.3 !important;
+  }
+  
+  .tilt-card:hover {
+    transform: scale(1.02) !important;
+  }
+}
+
+/* ===== Mobile Optimizations ===== */
+@media (max-width: 768px) {
+  /* Disable heavy animations on mobile */
+  .orb {
+    animation: none;
+    opacity: 0.2;
+  }
+  
+  #particle-canvas {
+    display: none;
+  }
+  
+  .tilt-card {
+    transform-style: flat;
+  }
+  
+  .tilt-card:hover {
+    transform: scale(1.02);
+  }
+  
+  section:hover {
+    transform: translateY(-10px);
+  }
+}
+
+/* ===== Loading State ===== */
+.loading {
+  pointer-events: none;
+  opacity: 0.6;
+  position: relative;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 4px solid rgba(167, 139, 250, 0.3);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spinner 0.8s linear infinite;
+}
+
+@keyframes spinner {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== Success/Error Flash Animations ===== */
+@keyframes flash-success {
+  0%, 100% { background: var(--card-bg); }
+  50% { background: rgba(16, 185, 129, 0.3); }
+}
+
+@keyframes flash-error {
+  0%, 100% { background: var(--card-bg); }
+  50% { background: rgba(239, 68, 68, 0.3); }
+}
+
+.flash-success {
+  animation: flash-success 0.6s ease;
+}
+
+.flash-error {
+  animation: flash-error 0.6s ease;
 }
