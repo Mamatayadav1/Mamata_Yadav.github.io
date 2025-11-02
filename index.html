@@ -9,25 +9,303 @@
   <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
 </head>
 <body>
-  <!-- Background Effects -->
+  <!-- Animated Background -->
   <div class="background-orbs">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
 
-  <!-- Header Section -->
-  <header>
-    <div class="profile-container">
-      <input type="file" id="profile-upload" accept="image/*" style="display:none;">
-      <img id="profile-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Crect fill='%23a78bfa' width='220' height='220'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='80' fill='white'%3EMY%3C/text%3E%3C/svg%3E" alt="Profile Picture">
-      <div class="upload-overlay">
-        <span>📸 Change Photo</span>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="nav-logo">MY</div>
+      <div class="nav-links">
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#blogs">Blogs</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
-    <h1 contenteditable="true" id="home-title">Hi, I'm Mamata Yadav 👋</h1>
-    <p contenteditable="true" id="home-subtitle">Data Scientist & AI Developer</p>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="hero-content">
+      <div class="profile-container">
+        <input type="file" id="profile-upload" accept="image/*" style="display:none;">
+        <div class="profile-ring">
+          <img id="profile-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Crect fill='%23a78bfa' width='220' height='220'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='80' fill='white'%3EMY%3C/text%3E%3C/svg%3E" alt="Profile Picture">
+        </div>
+        <div class="upload-overlay">
+          <span>📸 Upload Photo</span>
+        </div>
+      </div>
+      <h1 contenteditable="true" id="home-title" class="hero-title">Hi, I'm Mamata Yadav 👋</h1>
+      <p contenteditable="true" id="home-subtitle" class="hero-subtitle">Data Scientist & AI Developer</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">5+</span>
+          <span class="stat-label">Projects</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">3+</span>
+          <span class="stat-label">Blogs</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">10+</span>
+          <span class="stat-label">Skills</span>
+        </div>
+      </div>
+    </div>
   </header>
+
+  <main class="main-container">
+    <!-- Education Section -->
+    <section id="education" data-scroll-reveal>
+      <div class="section-header">
+        <div class="section-title-wrapper">
+          <span class="section-icon">🎓</span>
+          <h2>Education</h2>
+        </div>
+        <button class="add-btn" id="add-education-btn">
+          <span>+</span> Add Education
+        </button>
+      </div>
+      <div id="education-container" class="cards-container">
+        <div class="education-card">
+          <div class="card-glow"></div>
+          <div class="edu-degree" contenteditable="true">B.Sc & B.Ed (PCM)</div>
+          <div class="edu-school" contenteditable="true">RIE Bhubaneswar</div>
+          <div class="edu-year" contenteditable="true">2019–23</div>
+          <div class="edu-major" contenteditable="true">Chemistry Honors</div>
+          <button class="delete-btn">🗑️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" data-scroll-reveal>
+      <div class="section-header">
+        <div class="section-title-wrapper">
+          <span class="section-icon">💼</span>
+          <h2>Experience</h2>
+        </div>
+        <button class="add-btn" id="add-experience-btn">
+          <span>+</span> Add Experience
+        </button>
+      </div>
+      <div id="experience-container" class="cards-container">
+        <div class="experience-card">
+          <div class="card-glow"></div>
+          <div class="exp-title" contenteditable="true">AI/ML Developer</div>
+          <div class="exp-description" contenteditable="true">Working on AI/ML projects focusing on Deep Learning and NLP.</div>
+          <button class="delete-btn">🗑️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" data-scroll-reveal>
+      <div class="section-header">
+        <div class="section-title-wrapper">
+          <span class="section-icon">⚙️</span>
+          <h2>Skills</h2>
+        </div>
+        <button class="add-btn" id="add-skill-btn">
+          <span>+</span> Add Skill
+        </button>
+      </div>
+      <div class="skills-grid" id="skills-container">
+        <div class="skill-badge" contenteditable="true">Python</div>
+        <div class="skill-badge" contenteditable="true">TensorFlow</div>
+        <div class="skill-badge" contenteditable="true">Power BI</div>
+        <div class="skill-badge" contenteditable="true">Deep Learning</div>
+        <div class="skill-badge" contenteditable="true">NLP</div>
+        <div class="skill-badge" contenteditable="true">Machine Learning</div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" data-scroll-reveal>
+      <div class="section-header">
+        <div class="section-title-wrapper">
+          <span class="section-icon">🚀</span>
+          <h2>Projects</h2>
+        </div>
+        <button class="add-btn" id="add-project-btn">
+          <span>+</span> Add Project
+        </button>
+      </div>
+      <div id="projects-container" class="projects-grid">
+        <div class="project-card modern-card" data-link="">
+          <div class="card-shine"></div>
+          <div class="project-image-wrapper">
+            <input type="file" accept="image/*" style="display:none;" class="image-upload">
+            <div class="project-image">
+              <span class="upload-text">🎬<br>Click to upload</span>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-category" contenteditable="true">Machine Learning</div>
+            <h3 contenteditable="true">Movie Recommendation Engine</h3>
+            <p contenteditable="true">Built a collaborative filtering system for personalized movie recommendations.</p>
+            <div class="project-tags">
+              <span class="project-tag" contenteditable="true">Python</span>
+              <span class="project-tag" contenteditable="true">scikit-learn</span>
+              <span class="project-tag" contenteditable="true">Pandas</span>
+            </div>
+            <input type="text" class="project-link-input" placeholder="🔗 Project URL" value="">
+          </div>
+          <button class="delete-btn delete-project-btn">🗑️</button>
+        </div>
+
+        <div class="project-card modern-card" data-link="">
+          <div class="card-shine"></div>
+          <div class="project-image-wrapper">
+            <input type="file" accept="image/*" style="display:none;" class="image-upload">
+            <div class="project-image">
+              <span class="upload-text">🎨<br>Click to upload</span>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-category" contenteditable="true">Deep Learning</div>
+            <h3 contenteditable="true">CNN-based Color Model</h3>
+            <p contenteditable="true">Developed a convolutional neural network for color classification tasks.</p>
+            <div class="project-tags">
+              <span class="project-tag" contenteditable="true">TensorFlow</span>
+              <span class="project-tag" contenteditable="true">Keras</span>
+              <span class="project-tag" contenteditable="true">OpenCV</span>
+            </div>
+            <input type="text" class="project-link-input" placeholder="🔗 Project URL" value="">
+          </div>
+          <button class="delete-btn delete-project-btn">🗑️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blogs Section -->
+    <section id="blogs" data-scroll-reveal>
+      <div class="section-header">
+        <div class="section-title-wrapper">
+          <span class="section-icon">✍️</span>
+          <h2>Blogs</h2>
+        </div>
+        <button class="add-btn" id="add-blog-btn">
+          <span>+</span> Add Blog
+        </button>
+      </div>
+      <div id="blogs-container" class="blogs-grid">
+        <div class="blog-card modern-card" data-link="">
+          <div class="card-shine"></div>
+          <div class="blog-image-wrapper">
+            <input type="file" accept="image/*" style="display:none;" class="image-upload">
+            <div class="blog-image">
+              <span class="upload-text">📚<br>Click to upload</span>
+            </div>
+          </div>
+          <div class="blog-content">
+            <div class="blog-date" contenteditable="true">📅 Jan 2024</div>
+            <h3 contenteditable="true">LoRA Fine-tuning Explained</h3>
+            <p contenteditable="true">A comprehensive guide to Low-Rank Adaptation for efficient model fine-tuning.</p>
+            <div class="blog-tags">
+              <span class="blog-tag" contenteditable="true">LLM</span>
+              <span class="blog-tag" contenteditable="true">Fine-tuning</span>
+              <span class="blog-tag" contenteditable="true">LoRA</span>
+            </div>
+            <input type="text" class="blog-link-input" placeholder="🔗 Blog URL" value="">
+          </div>
+          <button class="delete-btn delete-blog-btn">🗑️</button>
+        </div>
+
+        <div class="blog-card modern-card" data-link="">
+          <div class="card-shine"></div>
+          <div class="blog-image-wrapper">
+            <input type="file" accept="image/*" style="display:none;" class="image-upload">
+            <div class="blog-image">
+              <span class="upload-text">🔤<br>Click to upload</span>
+            </div>
+          </div>
+          <div class="blog-content">
+            <div class="blog-date" contenteditable="true">📅 Dec 2023</div>
+            <h3 contenteditable="true">LLM Preprocessing Techniques</h3>
+            <p contenteditable="true">Best practices for preparing data for large language model training.</p>
+            <div class="blog-tags">
+              <span class="blog-tag" contenteditable="true">NLP</span>
+              <span class="blog-tag" contenteditable="true">LLM</span>
+              <span class="blog-tag" contenteditable="true">Data</span>
+            </div>
+            <input type="text" class="blog-link-input" placeholder="🔗 Blog URL" value="">
+          </div>
+          <button class="delete-btn delete-blog-btn">🗑️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" data-scroll-reveal>
+      <div class="section-header">
+        <div class="section-title-wrapper">
+          <span class="section-icon">📬</span>
+          <h2>Get In Touch</h2>
+        </div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon">📧</div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value" contenteditable="true">your.email@example.com</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📱</div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value" contenteditable="true">+91 XXXXX XXXXX</div>
+        </div>
+        <div class="contact-card contact-link-item" data-link="">
+          <div class="contact-icon">💼</div>
+          <div class="contact-label">LinkedIn</div>
+          <input type="text" class="contact-link-input" placeholder="linkedin.com/in/yourprofile" value="">
+          <div class="link-indicator">🔗</div>
+        </div>
+        <div class="contact-card contact-link-item" data-link="">
+          <div class="contact-icon">💻</div>
+          <div class="contact-label">GitHub</div>
+          <input type="text" class="contact-link-input" placeholder="github.com/yourusername" value="">
+          <div class="link-indicator">🔗</div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon">📍</div>
+          <div class="contact-label">Location</div>
+          <div class="contact-value" contenteditable="true">Your City, Country</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer with Action Buttons -->
+  <footer class="footer-section">
+    <div class="footer-content">
+      <button id="save-btn" class="action-btn primary-btn">
+        <span class="btn-icon">💾</span>
+        <span>Save Changes</span>
+      </button>
+      <button id="publish-btn" class="action-btn success-btn">
+        <span class="btn-icon">🚀</span>
+        <span>Publish to GitHub</span>
+      </button>
+    </div>
+    <div class="footer-text">
+      <p>Made with 💜 by Mamata Yadav</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="effects.js"></script>
+  <script src="portfolio-functions.js"></script>
+</body>
+</html>
 
   <main>
     <!-- Education Section -->
