@@ -739,12 +739,217 @@ footer {
   }
   
   .skills-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
   
   header {
     padding: 60px 20px 40px;
   }
+  
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Contact Section ===== */
+.contact-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.contact-item {
+  padding: 25px;
+  background: rgba(167, 139, 250, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all var(--transition);
+  position: relative;
+}
+
+.contact-item:hover {
+  background: rgba(167, 139, 250, 0.15);
+  border-color: rgba(167, 139, 250, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(167, 139, 250, 0.3);
+}
+
+.contact-item.clickable {
+  cursor: pointer;
+}
+
+.contact-item.clickable::after {
+  content: '🔗';
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.contact-item.clickable:hover::after {
+  opacity: 1;
+}
+
+.contact-icon {
+  font-size: 2rem;
+  display: block;
+}
+
+.contact-label {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-value {
+  font-size: 1.1rem;
+  color: var(--text);
+  padding: 8px;
+  border-radius: 8px;
+  transition: background var(--transition);
+}
+
+.contact-value:hover {
+  background: rgba(167, 139, 250, 0.1);
+}
+
+.contact-link {
+  width: 100%;
+  padding: 10px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  transition: all var(--transition);
+}
+
+.contact-link:focus {
+  border-color: var(--accent);
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.contact-link::placeholder {
+  color: rgba(229, 231, 235, 0.4);
+}
+
+/* ===== Project & Blog Link Inputs ===== */
+.project-link,
+.blog-link {
+  width: 100%;
+  padding: 12px 16px;
+  margin-top: 15px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  transition: all var(--transition);
+}
+
+.project-link:focus,
+.blog-link:focus {
+  border-color: var(--accent);
+  background: rgba(15, 23, 42, 0.7);
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.3);
+}
+
+.project-link::placeholder,
+.blog-link::placeholder {
+  color: rgba(229, 231, 235, 0.4);
+}
+
+/* ===== Image Upload Styling ===== */
+.project-image,
+.blog-image {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.upload-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1.2rem;
+  color: white;
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.8), rgba(192, 132, 252, 0.8));
+  transition: all var(--transition);
+  text-align: center;
+}
+
+.project-image:hover .upload-text,
+.blog-image:hover .upload-text {
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.95), rgba(192, 132, 252, 0.95));
+  transform: scale(1.05);
+}
+
+/* When image is uploaded, hide the upload text */
+.project-image[style*="background-image"] .upload-text,
+.blog-image[style*="background-image"] .upload-text {
+  display: none !important;
+}
+
+/* ===== Education & Experience Delete Buttons ===== */
+.education-item,
+.experience-item {
+  position: relative;
+}
+
+.education-item .delete-btn,
+.experience-item .delete-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 8px 12px;
+  background: rgba(239, 68, 68, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: all var(--transition);
+  z-index: 10;
+  border: none;
+  cursor: pointer;
+}
+
+.education-item:hover .delete-btn,
+.experience-item:hover .delete-btn {
+  opacity: 1;
+}
+
+.education-item .delete-btn:hover,
+.experience-item .delete-btn:hover {
+  background: rgba(239, 68, 68, 1);
+  transform: scale(1.1);
+}
+
+/* ===== Multiple Education/Experience Items ===== */
+#education-container,
+#experience-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== Skill Item Click to Edit ===== */
+.skill-item:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
 }
 
 /* ===== Smooth Scrolling ===== */
