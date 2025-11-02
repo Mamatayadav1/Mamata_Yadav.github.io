@@ -34,12 +34,16 @@
     <section id="education" data-scroll-reveal>
       <div class="section-header">
         <h2>Education 🎓</h2>
+        <button class="add-btn" onclick="addEducation()">+ Add Education</button>
       </div>
-      <div class="education-item" contenteditable="true" id="edu-text">
-        <div class="edu-degree">B.Sc & B.Ed (PCM)</div>
-        <div class="edu-school">RIE Bhubaneswar</div>
-        <div class="edu-year">2019–23</div>
-        <div class="edu-major">Chemistry Honors</div>
+      <div id="education-container">
+        <div class="education-item">
+          <div class="edu-degree" contenteditable="true">B.Sc & B.Ed (PCM)</div>
+          <div class="edu-school" contenteditable="true">RIE Bhubaneswar</div>
+          <div class="edu-year" contenteditable="true">2019–23</div>
+          <div class="edu-major" contenteditable="true">Chemistry Honors</div>
+          <button class="delete-btn" onclick="deleteItem(this)">🗑️</button>
+        </div>
       </div>
     </section>
 
@@ -47,10 +51,14 @@
     <section id="experience" data-scroll-reveal>
       <div class="section-header">
         <h2>Experience 💼</h2>
+        <button class="add-btn" onclick="addExperience()">+ Add Experience</button>
       </div>
-      <div class="experience-item" contenteditable="true" id="exp-text">
-        <div class="exp-title">AI/ML Developer</div>
-        <div class="exp-description">Working on AI/ML projects focusing on Deep Learning and NLP.</div>
+      <div id="experience-container">
+        <div class="experience-item">
+          <div class="exp-title" contenteditable="true">AI/ML Developer</div>
+          <div class="exp-description" contenteditable="true">Working on AI/ML projects focusing on Deep Learning and NLP.</div>
+          <button class="delete-btn" onclick="deleteItem(this)">🗑️</button>
+        </div>
       </div>
     </section>
 
@@ -58,14 +66,15 @@
     <section id="skills" data-scroll-reveal>
       <div class="section-header">
         <h2>Skills ⚙️</h2>
+        <button class="add-btn" onclick="addSkill()">+ Add Skill</button>
       </div>
-      <div class="skills-grid">
-        <div class="skill-item">→ Python</div>
-        <div class="skill-item">→ TensorFlow</div>
-        <div class="skill-item">→ Power BI</div>
-        <div class="skill-item">→ Deep Learning</div>
-        <div class="skill-item">→ NLP</div>
-        <div class="skill-item">→ Machine Learning</div>
+      <div class="skills-grid" id="skills-container">
+        <div class="skill-item" contenteditable="true">→ Python</div>
+        <div class="skill-item" contenteditable="true">→ TensorFlow</div>
+        <div class="skill-item" contenteditable="true">→ Power BI</div>
+        <div class="skill-item" contenteditable="true">→ Deep Learning</div>
+        <div class="skill-item" contenteditable="true">→ NLP</div>
+        <div class="skill-item" contenteditable="true">→ Machine Learning</div>
       </div>
     </section>
 
@@ -78,46 +87,58 @@
       <div id="projects-container" class="projects-grid">
         <!-- Projects will be added here dynamically -->
         <div class="project-card">
-          <div class="project-image">🎬</div>
+          <div class="project-image" onclick="uploadProjectImage(this)">
+            <input type="file" accept="image/*" style="display:none;" onchange="handleProjectImageUpload(event, this)">
+            <span class="upload-text">🎬<br>Click to upload</span>
+          </div>
           <div class="project-content">
-            <div class="project-category">Machine Learning</div>
+            <div class="project-category" contenteditable="true">Machine Learning</div>
             <h3 contenteditable="true">Movie Recommendation Engine</h3>
             <p contenteditable="true">Built a collaborative filtering system for personalized movie recommendations.</p>
             <div class="project-tags">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">scikit-learn</span>
-              <span class="project-tag">Pandas</span>
+              <span class="project-tag" contenteditable="true">Python</span>
+              <span class="project-tag" contenteditable="true">scikit-learn</span>
+              <span class="project-tag" contenteditable="true">Pandas</span>
             </div>
+            <input type="text" class="project-link" placeholder="https://project-link.com" contenteditable="false">
           </div>
           <button class="delete-btn" onclick="deleteProject(this)">🗑️</button>
         </div>
 
         <div class="project-card">
-          <div class="project-image">🎨</div>
+          <div class="project-image" onclick="uploadProjectImage(this)">
+            <input type="file" accept="image/*" style="display:none;" onchange="handleProjectImageUpload(event, this)">
+            <span class="upload-text">🎨<br>Click to upload</span>
+          </div>
           <div class="project-content">
-            <div class="project-category">Deep Learning</div>
+            <div class="project-category" contenteditable="true">Deep Learning</div>
             <h3 contenteditable="true">CNN-based Color Model</h3>
             <p contenteditable="true">Developed a convolutional neural network for color classification tasks.</p>
             <div class="project-tags">
-              <span class="project-tag">TensorFlow</span>
-              <span class="project-tag">Keras</span>
-              <span class="project-tag">OpenCV</span>
+              <span class="project-tag" contenteditable="true">TensorFlow</span>
+              <span class="project-tag" contenteditable="true">Keras</span>
+              <span class="project-tag" contenteditable="true">OpenCV</span>
             </div>
+            <input type="text" class="project-link" placeholder="https://project-link.com" contenteditable="false">
           </div>
           <button class="delete-btn" onclick="deleteProject(this)">🗑️</button>
         </div>
 
         <div class="project-card">
-          <div class="project-image">📊</div>
+          <div class="project-image" onclick="uploadProjectImage(this)">
+            <input type="file" accept="image/*" style="display:none;" onchange="handleProjectImageUpload(event, this)">
+            <span class="upload-text">📊<br>Click to upload</span>
+          </div>
           <div class="project-content">
-            <div class="project-category">Data Analysis</div>
+            <div class="project-category" contenteditable="true">Data Analysis</div>
             <h3 contenteditable="true">GDP Forecast Analysis</h3>
             <p contenteditable="true">Time series analysis and forecasting of GDP trends using statistical models.</p>
             <div class="project-tags">
-              <span class="project-tag">Python</span>
-              <span class="project-tag">ARIMA</span>
-              <span class="project-tag">Power BI</span>
+              <span class="project-tag" contenteditable="true">Python</span>
+              <span class="project-tag" contenteditable="true">ARIMA</span>
+              <span class="project-tag" contenteditable="true">Power BI</span>
             </div>
+            <input type="text" class="project-link" placeholder="https://project-link.com" contenteditable="false">
           </div>
           <button class="delete-btn" onclick="deleteProject(this)">🗑️</button>
         </div>
@@ -133,48 +154,94 @@
       <div id="blogs-container" class="blogs-grid">
         <!-- Blogs will be added here dynamically -->
         <div class="blog-card">
-          <div class="blog-image">📚</div>
+          <div class="blog-image" onclick="uploadBlogImage(this)">
+            <input type="file" accept="image/*" style="display:none;" onchange="handleBlogImageUpload(event, this)">
+            <span class="upload-text">📚<br>Click to upload</span>
+          </div>
           <div class="blog-content">
-            <div class="blog-date">📅 Jan 2024</div>
+            <div class="blog-date" contenteditable="true">📅 Jan 2024</div>
             <h3 contenteditable="true">LoRA Fine-tuning Explained</h3>
             <p contenteditable="true">A comprehensive guide to Low-Rank Adaptation for efficient model fine-tuning.</p>
             <div class="blog-tags">
-              <span class="blog-tag">LLM</span>
-              <span class="blog-tag">Fine-tuning</span>
-              <span class="blog-tag">LoRA</span>
+              <span class="blog-tag" contenteditable="true">LLM</span>
+              <span class="blog-tag" contenteditable="true">Fine-tuning</span>
+              <span class="blog-tag" contenteditable="true">LoRA</span>
             </div>
+            <input type="text" class="blog-link" placeholder="https://blog-link.com" contenteditable="false">
           </div>
           <button class="delete-btn" onclick="deleteBlog(this)">🗑️</button>
         </div>
 
         <div class="blog-card">
-          <div class="blog-image">🔤</div>
+          <div class="blog-image" onclick="uploadBlogImage(this)">
+            <input type="file" accept="image/*" style="display:none;" onchange="handleBlogImageUpload(event, this)">
+            <span class="upload-text">🔤<br>Click to upload</span>
+          </div>
           <div class="blog-content">
-            <div class="blog-date">📅 Dec 2023</div>
+            <div class="blog-date" contenteditable="true">📅 Dec 2023</div>
             <h3 contenteditable="true">LLM Preprocessing Techniques</h3>
             <p contenteditable="true">Best practices for preparing data for large language model training.</p>
             <div class="blog-tags">
-              <span class="blog-tag">NLP</span>
-              <span class="blog-tag">LLM</span>
-              <span class="blog-tag">Data</span>
+              <span class="blog-tag" contenteditable="true">NLP</span>
+              <span class="blog-tag" contenteditable="true">LLM</span>
+              <span class="blog-tag" contenteditable="true">Data</span>
             </div>
+            <input type="text" class="blog-link" placeholder="https://blog-link.com" contenteditable="false">
           </div>
           <button class="delete-btn" onclick="deleteBlog(this)">🗑️</button>
         </div>
 
         <div class="blog-card">
-          <div class="blog-image">📈</div>
+          <div class="blog-image" onclick="uploadBlogImage(this)">
+            <input type="file" accept="image/*" style="display:none;" onchange="handleBlogImageUpload(event, this)">
+            <span class="upload-text">📈<br>Click to upload</span>
+          </div>
           <div class="blog-content">
-            <div class="blog-date">📅 Nov 2023</div>
+            <div class="blog-date" contenteditable="true">📅 Nov 2023</div>
             <h3 contenteditable="true">Gaussian Mixture Models</h3>
             <p contenteditable="true">Understanding GMM for clustering and probability density estimation.</p>
             <div class="blog-tags">
-              <span class="blog-tag">ML</span>
-              <span class="blog-tag">Statistics</span>
-              <span class="blog-tag">Clustering</span>
+              <span class="blog-tag" contenteditable="true">ML</span>
+              <span class="blog-tag" contenteditable="true">Statistics</span>
+              <span class="blog-tag" contenteditable="true">Clustering</span>
             </div>
+            <input type="text" class="blog-link" placeholder="https://blog-link.com" contenteditable="false">
           </div>
           <button class="delete-btn" onclick="deleteBlog(this)">🗑️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" data-scroll-reveal>
+      <div class="section-header">
+        <h2>Contact 📬</h2>
+      </div>
+      <div class="contact-container">
+        <div class="contact-item">
+          <span class="contact-icon">📧</span>
+          <span class="contact-label">Email:</span>
+          <span class="contact-value" contenteditable="true">your.email@example.com</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📱</span>
+          <span class="contact-label">Phone:</span>
+          <span class="contact-value" contenteditable="true">+91 XXXXX XXXXX</span>
+        </div>
+        <div class="contact-item clickable" onclick="openLink(this)">
+          <span class="contact-icon">💼</span>
+          <span class="contact-label">LinkedIn:</span>
+          <input type="text" class="contact-link" placeholder="https://linkedin.com/in/yourprofile" contenteditable="false">
+        </div>
+        <div class="contact-item clickable" onclick="openLink(this)">
+          <span class="contact-icon">💻</span>
+          <span class="contact-label">GitHub:</span>
+          <input type="text" class="contact-link" placeholder="https://github.com/yourusername" contenteditable="false">
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <span class="contact-label">Location:</span>
+          <span class="contact-value" contenteditable="true">Your City, Country</span>
         </div>
       </div>
     </section>
